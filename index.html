@@ -1,170 +1,151 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-  <title>Rutikesh Pawar – Data Analyst Portfolio</title>
+  <title>Rutikesh Pawar | Portfolio</title>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link rel="stylesheet" href="assets/css/main.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: #1a1a1a;
+      color: #f4f4f4;
+    }
+    h1, h2, h3, h4 {
+      color: #fff;
+    }
+    .hero {
+      text-align: center;
+      padding: 100px 20px 60px;
+    }
+    .hero h1 {
+      font-size: 48px;
+      margin-bottom: 10px;
+    }
+    .hero p {
+      font-size: 18px;
+      margin-bottom: 10px;
+    }
+    .button {
+      padding: 12px 30px;
+      background: #00BFFF;
+      color: #fff;
+      border-radius: 5px;
+      text-decoration: none;
+      font-weight: 600;
+    }
+    .projects {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      padding: 40px 10px;
+      background: #fff;
+      color: #000;
+    }
+    .project {
+      width: 300px;
+      margin: 20px;
+      background: #f9f9f9;
+      border-radius: 10px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      overflow: hidden;
+    }
+    .project img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+    }
+    .project .content {
+      padding: 15px;
+    }
+    .project .content h3 {
+      font-size: 18px;
+      margin: 0 0 10px;
+    }
+    .project .content p {
+      font-size: 14px;
+      margin-bottom: 10px;
+    }
+    .contact {
+      background: #111;
+      color: #fff;
+      text-align: center;
+      padding: 60px 20px;
+    }
+    .contact a {
+      color: #00BFFF;
+      text-decoration: none;
+    }
+    footer {
+      background: #000;
+      color: #777;
+      text-align: center;
+      padding: 20px;
+    }
+    .social-icons a {
+      margin: 0 10px;
+      color: #00BFFF;
+      font-size: 20px;
+    }
+  </style>
 </head>
-<body class="is-preload">
+<body>
 
-  <!-- Wrapper -->
-  <div id="wrapper" class="fade-in">
-
-    <!-- Hero / Intro -->
-    <div id="intro">
-      <h1>Hi, I'm<br />Rutikesh Pawar</h1>
-      <p>Data Analyst & Aspiring Data Scientist<br />
-      📍 Navi Mumbai | Open to Remote & On-site Roles<br />
-      Python • SQL • Tableau • Machine Learning</p>
-      <ul class="actions">
-        <li><a href="assets/Rutikesh_Pawar_Resume.pdf" class="button primary icon solid fa-download">Download Resume</a></li>
-        <li><a href="#main" class="button icon solid solo fa-arrow-down scrolly">Explore</a></li>
-      </ul>
-      <ul class="icons">
-        <li><a href="https://linkedin.com/in/rutikeshpawar227" class="icon brands fa-linkedin"><span class="label">LinkedIn</span></a></li>
-        <li><a href="https://github.com/rutikeshpawar" class="icon brands fa-github"><span class="label">GitHub</span></a></li>
-        <li><a href="mailto:rutikeshpawar2000@gmail.com" class="icon solid fa-envelope"><span class="label">Email</span></a></li>
-      </ul>
+  <!-- Hero Section -->
+  <section class="hero">
+    <h1>Hi, I'm<br><strong>Rutikesh Pawar</strong></h1>
+    <p>📍 Open to Remote & On-site Roles</p>
+    <p>💼 Aspiring Data Analyst | Data Scientist</p>
+    <p>🧠 Python • SQL • Excel • Tableau/Power BI • ML</p>
+    <a href="resume.pdf" class="button" target="_blank">Download Resume</a>
+    <div class="social-icons" style="margin-top: 20px;">
+      <a href="https://www.linkedin.com/in/rutikeshpawar227" target="_blank"><i class="fab fa-linkedin"></i></a>
+      <a href="https://github.com/rutikeshpawar" target="_blank"><i class="fab fa-github"></i></a>
+      <a href="mailto:rutikeshpawar2000@gmail.com"><i class="fas fa-envelope"></i></a>
     </div>
+  </section>
 
-    <!-- Header -->
-    <header id="header">
-      <a href="index.html" class="logo">My Portfolio</a>
-    </header>
-
-    <!-- Navigation -->
-    <nav id="nav">
-      <ul class="links">
-        <li class="active"><a href="index.html">Home</a></li>
-        <li><a href="generic.html">About Me</a></li>
-        <li><a href="elements.html">Skills</a></li>
-      </ul>
-    </nav>
-
-    <!-- Quick Stats -->
-    <section class="tiles" style="padding: 2rem;">
-      <article>
-        <span class="icon solid fa-laptop-code"></span>
-        <h3>6+ Projects Completed</h3>
-        <p>Real-world & End-to-End Business Cases</p>
-      </article>
-      <article>
-        <span class="icon solid fa-chart-line"></span>
-        <h3>3 Dashboards</h3>
-        <p>Interactive Tableau Visualizations</p>
-      </article>
-      <article>
-        <span class="icon solid fa-briefcase"></span>
-        <h3>6-Month Internship</h3>
-        <p>As a Data Analyst at Guardneer</p>
-      </article>
-    </section>
-
-    <!-- Main Projects -->
-    <div id="main">
-      <section class="posts" style="display: flex; flex-wrap: wrap; justify-content: center; gap: 2rem;">
-
-        <!-- Project 1 -->
-        <article>
-          <header>
-            <span class="date">Dec 2024</span>
-            <h2><a href="#">Smart Farming & Water Optimization</a></h2>
-          </header>
-          <a href="#" class="image fit"><img src="images/farming-dashboard.png" alt="Dashboard" /></a>
-          <p>Analyzed 2000+ farms using engineered KPIs like soil health, water efficiency, profit/acre, and Guardneer effectiveness.</p>
-          <ul class="actions special">
-            <li><a href="https://github.com/rutikeshpawar/Guardneer_Internship_Projects/tree/main/3_guardneer-smart-farming" class="button">View Project</a></li>
-          </ul>
-        </article>
-
-        <!-- Project 2 -->
-        <article>
-          <header>
-            <span class="date">Oct 2024</span>
-            <h2><a href="#">Customer Segmentation Model</a></h2>
-          </header>
-          <a href="#" class="image fit"><img src="images/customer-segmentation.png" alt="Segmentation" /></a>
-          <p>Clustered users using K-Means ML to deliver optimized customer support and upsell strategies.</p>
-          <ul class="actions special">
-            <li><a href="https://github.com/rutikeshpawar/Guardneer_Internship_Projects/tree/main/2-customer-segmentation-model" class="button">View Project</a></li>
-          </ul>
-        </article>
-
-        <!-- Project 3 -->
-        <article>
-          <header>
-            <span class="date">Aug 2024</span>
-            <h2><a href="#">Water Maintenance Dashboard</a></h2>
-          </header>
-          <a href="#" class="image fit"><img src="images/water-dashboard.png" alt="Maintenance" /></a>
-          <p>Built a real-time monitoring Tableau dashboard to track system health and alert high-maintenance zones.</p>
-          <ul class="actions special">
-            <li><a href="https://github.com/rutikeshpawar/Guardneer_Internship_Projects/tree/main/1-water-quality-dashboard" class="button">View Project</a></li>
-          </ul>
-        </article>
-      </section>
+  <!-- Projects Section -->
+  <section class="projects">
+    <div class="project">
+      <img src="images/farming-dashboard.png" alt="Smart Farming Dashboard" />
+      <div class="content">
+        <h3>Smart Farming & Water Optimization</h3>
+        <p>Analyzed 2000+ farms using KPIs like soil health, water efficiency, profit/acre, Guardneer effectiveness.</p>
+        <a href="https://github.com/rutikeshpawar/Guardneer_Internship_Projects/tree/main/3_guardneer-smart-farming" class="button">View Project</a>
+      </div>
     </div>
-
-    <!-- CTA Section -->
-    <section class="cta" style="text-align: center;">
-      <h2>📬 Let's Connect</h2>
-      <p>I'm actively seeking Data Analyst/Data Scientist roles. If you're hiring or collaborating, let's talk!</p>
-      <ul class="actions special">
-        <li><a href="mailto:rutikeshpawar2000@gmail.com" class="button">Hire Me</a></li>
-      </ul>
-    </section>
-
-    <!-- Footer Contact Form -->
-    <footer id="footer">
-      <section>
-        <form method="POST" action="https://formsubmit.co/rutikeshpawar2000@gmail.com">
-          <div class="fields">
-            <div class="field">
-              <label for="name">Name</label>
-              <input type="text" name="name" required />
-            </div>
-            <div class="field">
-              <label for="email">Email</label>
-              <input type="email" name="email" required />
-            </div>
-            <div class="field">
-              <label for="message">Message</label>
-              <textarea name="message" rows="3" required></textarea>
-            </div>
-          </div>
-          <input type="hidden" name="_captcha" value="false">
-          <ul class="actions">
-            <li><input type="submit" value="Send Message" /></li>
-          </ul>
-        </form>
-      </section>
-      <section class="split contact">
-        <section>
-          <h3>Email</h3>
-          <p><a href="mailto:rutikeshpawar2000@gmail.com">rutikeshpawar2000@gmail.com</a></p>
-        </section>
-        <section>
-          <h3>LinkedIn</h3>
-          <p><a href="https://linkedin.com/in/rutikeshpawar227">linkedin.com/in/rutikeshpawar227</a></p>
-        </section>
-      </section>
-    </footer>
-
-    <!-- Copyright -->
-    <div id="copyright">
-      <ul><li>&copy; 2024 Rutikesh Pawar</li><li>Design: HTML5 UP</li></ul>
+    <div class="project">
+      <img src="images/customer-segmentation.png" alt="Customer Segmentation" />
+      <div class="content">
+        <h3>Customer Segmentation</h3>
+        <p>Grouped users using ML to improve targeting, support, and upselling strategies. Visualized with Tableau.</p>
+        <a href="https://github.com/rutikeshpawar/Guardneer_Internship_Projects/tree/main/2-customer-segmentation-model" class="button">View Project</a>
+      </div>
     </div>
+    <div class="project">
+      <img src="images/water-dashboard.png" alt="Maintenance Dashboard" />
+      <div class="content">
+        <h3>Water Quality Dashboard</h3>
+        <p>Tracked system uptime, risky systems, and performance trends across regions using Tableau dashboards.</p>
+        <a href="https://github.com/rutikeshpawar/Guardneer_Internship_Projects/tree/main/1-water-quality-dashboard" class="button">View Project</a>
+      </div>
+    </div>
+  </section>
 
-  </div>
+  <!-- Contact Section -->
+  <section class="contact">
+    <h2>Contact Me</h2>
+    <p>Email: <a href="mailto:rutikeshpawar2000@gmail.com">rutikeshpawar2000@gmail.com</a></p>
+    <p>LinkedIn: <a href="https://www.linkedin.com/in/rutikeshpawar227">linkedin.com/in/rutikeshpawar227</a></p>
+  </section>
 
-  <!-- Scripts -->
-  <script src="assets/js/jquery.min.js"></script>
-  <script src="assets/js/jquery.scrolly.min.js"></script>
-  <script src="assets/js/jquery.scrollex.min.js"></script>
-  <script src="assets/js/browser.min.js"></script>
-  <script src="assets/js/breakpoints.min.js"></script>
-  <script src="assets/js/util.js"></script>
-  <script src="assets/js/main.js"></script>
+  <!-- Footer -->
+  <footer>
+    &copy; 2024 Rutikesh Pawar. Built with ❤️ by me.
+  </footer>
+
 </body>
 </html>
