@@ -2,114 +2,206 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Rutikesh Pawar | Portfolio</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Rutikesh Pawar Portfolio</title>
   <link rel="stylesheet" href="assets/css/main.css" />
-  <style>
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
+  <link rel="stylesheet" href="assets/css/fontawesome-all.min.css" />
+  <script>
+    function toggleMenu() {
+      document.getElementById("sidebar").classList.toggle("open");
     }
+  </script>
+  <style>
+    /* Sidebar toggle button */
+    .menu-toggle {
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      background: #212931;
+      color: #fff;
+      padding: 10px 15px;
+      border: none;
+      font-size: 18px;
+      cursor: pointer;
+      z-index: 1000;
+    }
+
+    /* Sidebar menu */
     #sidebar {
       position: fixed;
       top: 0;
-      left: 0;
-      width: 240px;
+      left: -250px;
+      width: 250px;
       height: 100%;
-      background: #222;
-      color: white;
-      padding-top: 40px;
-      text-align: center;
+      background: #1e252d;
+      padding: 2rem 1rem;
+      transition: 0.3s;
+      z-index: 999;
     }
-    #sidebar h2 {
-      margin: 0 0 20px;
-      font-size: 24px;
+
+    #sidebar.open {
+      left: 0;
     }
+
     #sidebar ul {
-      list-style-type: none;
+      list-style: none;
       padding: 0;
     }
+
     #sidebar ul li {
-      margin: 20px 0;
+      margin-bottom: 1.5rem;
     }
+
     #sidebar ul li a {
       color: #fff;
       text-decoration: none;
       font-weight: bold;
     }
-    #sidebar .icons {
-      margin-top: 40px;
-    }
+
     #sidebar .icons a {
-      margin: 0 10px;
-      color: #fff;
-      font-size: 18px;
+      margin-right: 1rem;
+      color: #18bfef;
     }
-    #content {
-      margin-left: 240px;
-      padding: 40px;
+
+    /* Main content offset */
+    #wrapper {
+      margin-left: 0;
+      transition: margin-left 0.3s;
     }
-    footer form input,
-    footer form textarea {
-      width: 100%;
-      padding: 10px;
-      margin-bottom: 15px;
-      border: 1px solid #ccc;
+
+    #sidebar.open ~ #wrapper {
+      margin-left: 250px;
     }
-    footer form input[type="submit"] {
-      background-color: #007BFF;
-      color: #fff;
-      border: none;
-      cursor: pointer;
+
+    @media screen and (max-width: 768px) {
+      #wrapper {
+        margin-left: 0 !important;
+      }
     }
   </style>
-  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 </head>
-<body>
+<body class="is-preload">
+  <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+
+  <!-- Sidebar -->
   <div id="sidebar">
-    <h2>Rutikesh</h2>
+    <h2 style="color: #fff;">Navigation</h2>
     <ul>
-      <li><a href="index.html">Home</a></li>
-      <li><a href="generic.html">About Me</a></li>
-      <li><a href="elements.html">Skills</a></li>
+      <li><a href="index.html">🏠 Home</a></li>
+      <li><a href="generic.html">👤 About Me</a></li>
+      <li><a href="elements.html">💡 Skills</a></li>
     </ul>
+    <h3 style="color: #fff;">Connect</h3>
     <div class="icons">
-      <a href="https://www.linkedin.com/in/rutikeshpawar227" class="icon brands fa-linkedin" target="_blank"></a>
-      <a href="https://github.com/rutikeshpawar" class="icon brands fa-github" target="_blank"></a>
-      <a href="mailto:rutikeshpawar2000@gmail.com" class="icon solid fa-envelope"></a>
+      <a href="https://www.linkedin.com/in/rutikeshpawar227" class="icon brands fa-linkedin"><span class="label">LinkedIn</span></a>
+      <a href="https://github.com/rutikeshpawar" class="icon brands fa-github"><span class="label">GitHub</span></a>
+      <a href="mailto:rutikeshpawar2000@gmail.com" class="icon solid fa-envelope"><span class="label">Email</span></a>
     </div>
   </div>
 
-  <div id="content">
-    <header>
-      <h1>Hi, I'm Rutikesh Pawar</h1>
-      <p>Data Analyst & Aspiring Data Scientist based in Navi Mumbai. Open to Remote & On-site Roles.</p>
-      <p>Python • SQL • Tableau • Machine Learning</p>
-      <a href="resume.pdf" download class="button">Download Resume</a>
-    </header>
+  <!-- Main Content -->
+  <div id="wrapper" class="fade-in">
+    <div id="intro">
+      <h1>Hello, I'm<br />Rutikesh Pawar</h1>
+      <p>Data Analyst & Aspiring Data Scientist | Python • SQL • Tableau • ML <br />
+        I turn raw data into smart, decision-driving insights.
+      </p>
+      <ul class="actions">
+        <li><a href="#main" class="button icon solid solo fa-arrow-down scrolly">Explore</a></li>
+      </ul>
+    </div>
 
-    <section>
-      <h2>Projects</h2>
-      <!-- Repeat for each project -->
-      <article>
-        <h3>Smart Farming & Water Optimization</h3>
-        <p>Analyzed 2000+ farms using engineered KPIs like soil health, water efficiency, profit/acre, and Guardneer effectiveness.</p>
-        <a href="https://github.com/rutikeshpawar/Guardneer_Internship_Projects/tree/main/3_guardneer-smart-farming" target="_blank">View Project</a>
-      </article>
-      <!-- Add others similarly -->
-    </section>
+    <!-- Main Projects Section -->
+    <div id="main">
+      <section class="posts" style="display: flex; flex-wrap: wrap; justify-content: center;">
+        <!-- Project 1 -->
+        <article>
+          <header>
+            <h2><a href="#">Smart Farming & Water Optimization</a></h2>
+            <span class="date">June 2024 - Dec 2024</span>
+          </header>
+          <a href="#" class="image fit"><img src="images/farming-dashboard.png" alt="Smart Farming Dashboard" /></a>
+          <p>Created using Python + Tableau. Simulated and optimized water usage across 2000+ farms using KPIs like soil health, water efficiency, and Guardneer effectiveness.</p>
+          <ul class="actions special">
+            <li><a href="https://github.com/rutikeshpawar/Guardneer_Internship_Projects/tree/main/3_guardneer-smart-farming" class="button">View Project</a></li>
+          </ul>
+        </article>
 
-    <footer>
-      <h2>Contact Me</h2>
-      <form action="https://formsubmit.co/rutikeshpawar2000@gmail.com" method="POST">
-        <input type="text" name="name" placeholder="Your Name" required />
-        <input type="email" name="email" placeholder="Your Email" required />
-        <textarea name="message" placeholder="Your Message" required></textarea>
-        <input type="submit" value="Send Message" />
-      </form>
-      <p>Email: <a href="mailto:rutikeshpawar2000@gmail.com">rutikeshpawar2000@gmail.com</a></p>
-      <p>LinkedIn: <a href="https://www.linkedin.com/in/rutikeshpawar227">linkedin.com/in/rutikeshpawar227</a></p>
+        <!-- Project 2 -->
+        <article>
+          <header>
+            <h2><a href="#">Customer Segmentation Model</a></h2>
+            <span class="date">Oct 2024</span>
+          </header>
+          <a href="#" class="image fit"><img src="images/customer-segmentation.png" alt="Customer Segmentation" /></a>
+          <p>Used machine learning (K-Means) to segment users by behavior. Delivered actionable clusters visualized in Tableau.</p>
+          <ul class="actions special">
+            <li><a href="https://github.com/rutikeshpawar/Guardneer_Internship_Projects/tree/main/2-customer-segmentation-model" class="button">View Project</a></li>
+          </ul>
+        </article>
+
+        <!-- Project 3 -->
+        <article>
+          <header>
+            <h2><a href="#">Water Quality & Maintenance Dashboard</a></h2>
+            <span class="date">Aug 2024</span>
+          </header>
+          <a href="#" class="image fit"><img src="images/water-dashboard.png" alt="Water Quality Dashboard" /></a>
+          <p>Built a dashboard in Tableau to monitor system uptime and flag risky installations. Used KPIs and zone filters.</p>
+          <ul class="actions special">
+            <li><a href="https://github.com/rutikeshpawar/Guardneer_Internship_Projects/tree/main/1-water-quality-dashboard" class="button">View Project</a></li>
+          </ul>
+        </article>
+      </section>
+    </div>
+
+    <!-- Footer -->
+    <footer id="footer">
+      <section>
+        <form method="POST" action="mailto:rutikeshpawar2000@gmail.com" enctype="text/plain">
+          <div class="fields">
+            <div class="field">
+              <label for="name">Name</label>
+              <input type="text" name="name" id="name" required />
+            </div>
+            <div class="field">
+              <label for="email">Email</label>
+              <input type="email" name="email" id="email" required />
+            </div>
+            <div class="field">
+              <label for="message">Message</label>
+              <textarea name="message" id="message" rows="3" required></textarea>
+            </div>
+          </div>
+          <ul class="actions">
+            <li><input type="submit" value="Send Message" /></li>
+          </ul>
+        </form>
+      </section>
+      <section class="split contact">
+        <section>
+          <h3>Email</h3>
+          <p><a href="mailto:rutikeshpawar2000@gmail.com">rutikeshpawar2000@gmail.com</a></p>
+        </section>
+        <section>
+          <h3>LinkedIn</h3>
+          <p><a href="https://linkedin.com/in/rutikeshpawar227">linkedin.com/in/rutikeshpawar227</a></p>
+        </section>
+      </section>
     </footer>
+
+    <div id="copyright">
+      <ul><li>&copy; 2024 Rutikesh Pawar</li><li>Design: <a href="https://html5up.net">HTML5 UP</a></li></ul>
+    </div>
   </div>
+
+  <!-- Scripts -->
+  <script src="assets/js/jquery.min.js"></script>
+  <script src="assets/js/jquery.scrollex.min.js"></script>
+  <script src="assets/js/jquery.scrolly.min.js"></script>
+  <script src="assets/js/browser.min.js"></script>
+  <script src="assets/js/breakpoints.min.js"></script>
+  <script src="assets/js/util.js"></script>
+  <script src="assets/js/main.js"></script>
 </body>
 </html>
