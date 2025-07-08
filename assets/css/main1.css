@@ -2557,18 +2557,30 @@ input, select, textarea {
 		}
 
 		.icon-list {
-		  display: flex;
-		  flex-wrap: wrap;
-		  gap: 20px; /* Add space between icons */
-		  font-size: 34px;
-		  margin-top: 16px;
-		  justify-content: flex-start;
-		  align-items: center;
-		  padding-left: 0;
-		  list-style: none;
-		}
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  gap: 20px;
+  padding: 0;
+  margin-top: 10px;
+}
+
+.icon-list span {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: #f5f5f5;
+  border-radius: 10px;
+  padding: 10px;
+  transition: background 0.3s;
+}
+
+.icon-list span:hover {
+  background: #e0f7fb;
+}
 		
 		.icon-list i {
+			font-size: 28px;
 		  color: #444;
 		  transition: 0.3s;
 		  display: inline-block;
