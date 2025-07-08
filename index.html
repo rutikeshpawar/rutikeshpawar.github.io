@@ -5,50 +5,46 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Rutikesh Pawar Portfolio</title>
   <link rel="stylesheet" href="assets/css/main.css" />
-  <link rel="stylesheet" href="assets/css/fontawesome-all.min.css" />
-  <script>
-    function toggleMenu() {
-      document.getElementById("sidebar").classList.toggle("open");
-    }
-  </script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+
   <style>
     /* Sidebar toggle button */
-   .menu-toggle {
-    position: fixed;
-    top: 20px;
-    left: 20px;
-    background: #212931;
-    color: white;
-    padding: 10px 15px;
-    font-size: 1.2em;
-    z-index: 9999;
-    border: none;
-    cursor: pointer;
-    border-radius: 4px;
-  }
+    .menu-toggle {
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      background: #212931;
+      color: white;
+      padding: 10px 15px;
+      font-size: 18px;
+      z-index: 9999;
+      border: none;
+      cursor: pointer;
+      border-radius: 4px;
+    }
 
-    /* Sidebar menu */
+    /* Sidebar */
     #sidebar {
-    position: fixed;
-    top: 0;
-    left: -260px;
-    width: 250px;
-    height: 100%;
-    background: #111;
-    padding: 30px 20px;
-    transition: 0.3s ease-in-out;
-    z-index: 9998;
-    overflow-y: auto;
-  }
+      position: fixed;
+      top: 0;
+      left: -260px;
+      width: 240px;
+      height: 100%;
+      background: #111;
+      padding: 2rem 1rem;
+      transition: 0.3s;
+      z-index: 9998;
+      overflow-y: auto;
+    }
 
     #sidebar.open {
       left: 0;
     }
 
     #sidebar h2, #sidebar h3 {
-    color: #fff;
-    margin-bottom: 20px;
-  }
+      color: #fff;
+      margin-bottom: 20px;
+    }
 
     #sidebar ul {
       list-style: none;
@@ -56,40 +52,48 @@
     }
 
     #sidebar ul li {
-      margin: 20px 0;
+      margin: 15px 0;
     }
 
     #sidebar ul li a {
       color: #fff;
-      font-size: 1.1em;
       text-decoration: none;
-      font-weight: bold;
+      font-size: 1.1em;
     }
 
     #sidebar .icons a {
-      margin-right: 10px;
       color: #18bfef;
+      margin-right: 10px;
       font-size: 1.5em;
     }
 
-    /* Main content offset */
-   @media (min-width: 992px) {
-    #sidebar {
-      left: 0;
-    }
-    .menu-toggle {
-      display: none;
-    }
+    /* Offset content when sidebar is open */
     #wrapper {
-      margin-left: 250px;
+      transition: margin-left 0.3s;
     }
-  }
+
+    @media (min-width: 992px) {
+      #sidebar {
+        left: 0;
+      }
+
+      #wrapper {
+        margin-left: 240px;
+      }
+
+      .menu-toggle {
+        display: none;
+      }
+    }
   </style>
 </head>
+
 <body class="is-preload">
+
+  <!-- ☰ Toggle Button -->
   <button class="menu-toggle" onclick="toggleMenu()">☰</button>
 
-  <!-- Sidebar -->
+  <!-- Sidebar Menu -->
   <div id="sidebar">
     <h2>Menu</h2>
     <ul>
@@ -99,14 +103,16 @@
     </ul>
     <h3>Connect</h3>
     <div class="icons">
-      <a href="https://www.linkedin.com/in/rutikeshpawar227" class="icon brands fa-linkedin"><span class="label">LinkedIn</span></a>
-      <a href="https://github.com/rutikeshpawar" class="icon brands fa-github"><span class="label">GitHub</span></a>
-      <a href="mailto:rutikeshpawar2000@gmail.com" class="icon solid fa-envelope"><span class="label">Email</span></a>
+      <a href="https://linkedin.com/in/rutikeshpawar227" target="_blank"><i class="fab fa-linkedin"></i></a>
+      <a href="https://github.com/rutikeshpawar" target="_blank"><i class="fab fa-github"></i></a>
+      <a href="mailto:rutikeshpawar2000@gmail.com"><i class="fas fa-envelope"></i></a>
     </div>
   </div>
 
-  <!-- Main Content -->
+  <!-- Main Content Wrapper -->
   <div id="wrapper" class="fade-in">
+
+    <!-- Hero Section -->
     <div id="intro">
       <h1>Hello, I'm<br />Rutikesh Pawar</h1>
       <p>Data Analyst & Aspiring Data Scientist | Python • SQL • Tableau • ML <br />
@@ -117,9 +123,10 @@
       </ul>
     </div>
 
-    <!-- Main Projects Section -->
+    <!-- Main Content -->
     <div id="main">
       <section class="posts" style="display: flex; flex-wrap: wrap; justify-content: center;">
+
         <!-- Project 1 -->
         <article>
           <header>
@@ -158,10 +165,11 @@
             <li><a href="https://github.com/rutikeshpawar/Guardneer_Internship_Projects/tree/main/1-water-quality-dashboard" class="button">View Project</a></li>
           </ul>
         </article>
+
       </section>
     </div>
 
-    <!-- Footer -->
+    <!-- Footer Contact Section -->
     <footer id="footer">
       <section>
         <form method="POST" action="mailto:rutikeshpawar2000@gmail.com" enctype="text/plain">
@@ -196,6 +204,7 @@
       </section>
     </footer>
 
+    <!-- Copyright -->
     <div id="copyright">
       <ul><li>&copy; 2024 Rutikesh Pawar</li><li>Design: <a href="https://html5up.net">HTML5 UP</a></li></ul>
     </div>
@@ -210,11 +219,11 @@
   <script src="assets/js/util.js"></script>
   <script src="assets/js/main.js"></script>
 
+  <!-- Toggle Sidebar -->
   <script>
     function toggleMenu() {
       document.getElementById('sidebar').classList.toggle('open');
     }
   </script>
-  
 </body>
 </html>
