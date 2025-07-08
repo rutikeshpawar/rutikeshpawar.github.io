@@ -7,156 +7,24 @@
   <link rel="stylesheet" href="assets/css/main.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" />
-
- <style>
-  /* Remove margin on body */
-  html, body {
-    margin: 0;
-    padding: 0;
-    overflow-x: hidden;
-    font-family: "Segoe UI", sans-serif;
-  }
-
-  /* ☰ Toggle button */
-  .menu-toggle {
-    position: fixed;
-    top: 20px;
-    left: 20px;
-    background: #212931;
-    color: white;
-    padding: 10px 15px;
-    font-size: 18px;
-    z-index: 9999;
-    border: none;
-    cursor: pointer;
-    border-radius: 4px;
-  }
-
-  /* Sidebar container */
-  #sidebar {
-    position: fixed;
-    top: 0;
-    left: -260px;
-    width: 240px;
-    height: 100%;
-    background: #111;
-    padding: 2rem 1rem;
-    transition: left 0.3s ease-in-out;
-    z-index: 9998;
-    overflow-y: auto;
-    box-sizing: border-box;
-  }
-
-  /* Show sidebar when open */
-  #sidebar.open {
-    left: 0;
-  }
-
-  /* Sidebar content */
-  #sidebar h3 {
-    color: #fff;
-    margin-top: 2rem;
-    font-size: 0.9rem;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-  }
-
-  #sidebar ul {
-    list-style: none;
-    padding: 0;
-    margin: 1rem 0;
-  }
-
-  #sidebar ul li {
-    margin: 15px 0;
-    border-bottom: 1px dotted #444;
-    padding-bottom: 10px;
-  }
-
-  #sidebar ul li a {
-    color: #fff;
-    text-decoration: none;
-    font-size: 1.05em;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-  }
-
-  #sidebar .icons {
-    display: flex;
-    margin-top: 10px;
-  }
-
-  #sidebar .icons a {
-    color: #18bfef;
-    margin-right: 10px;
-    font-size: 1.4em;
-  }
-
-  #wrapper {
-    transition: margin-left 0.3s;
-    padding: 2rem 1rem;
-    box-sizing: border-box;
-  }
-
-  /* Responsive: on desktop, always show sidebar */
-  @media (min-width: 992px) {
-    #sidebar {
-      left: 0;
-    }
-
-    #wrapper {
-      margin-left: 240px;
-    }
-
-    .menu-toggle {
-      display: none;
-    }
-  }
-
-  /* Prevent toggle button from covering content */
-  #intro {
-    padding-top: 80px;
-  }
-
-</style>
-
 </head>
 
 <body class="is-preload">
 
-  <!-- ☰ Menu Toggle (Mobile) -->
-  <button class="menu-toggle" onclick="toggleMenu()">☰ MENU</button>
-
-  <!-- Sidebar -->
-  <div id="sidebar">
-    <ul>
-      <li><a href="index.html">🏠 Home</a></li>
-      <li><a href="generic.html">👤 About Me</a></li>
-      <li><a href="elements.html">💡 Skills</a></li>
-    </ul>
-    <h3>Connect</h3>
-    <div class="icons">
-      <a href="https://linkedin.com/in/rutikeshpawar227" target="_blank"><i class="fab fa-linkedin"></i></a>
-      <a href="https://github.com/rutikeshpawar" target="_blank"><i class="fab fa-github"></i></a>
-      <a href="mailto:rutikeshpawar2000@gmail.com"><i class="fas fa-envelope"></i></a>
-    </div>
-  </div>
-
-  <!-- Main Content -->
+  <!-- Hero Section -->
   <div id="wrapper" class="fade-in">
 
-    <!-- Hero Section -->
+    <!-- Intro / Landing -->
     <div id="intro">
       <h1>Hello, I'm<br />Rutikesh Pawar</h1>
-      <p>Data Analyst & Aspiring Data Scientist | Python • SQL • Tableau • ML <br />
+      <p>Data Analyst & Aspiring Data Scientist | Python • SQL • Tableau • ML<br />
         I turn raw data into smart, decision-driving insights.</p>
       <ul class="actions">
         <li><a href="#main" class="button icon solid solo fa-arrow-down scrolly">Explore</a></li>
       </ul>
     </div>
 
-    <!-- Project Portfolio -->
+    <!-- Main Content -->
     <div id="main">
       <section class="posts" style="display: flex; flex-wrap: wrap; justify-content: center;">
 
@@ -202,7 +70,7 @@
       </section>
     </div>
 
-    <!-- Contact Footer -->
+    <!-- Footer Contact Section -->
     <footer id="footer">
       <section>
         <form method="POST" action="mailto:rutikeshpawar2000@gmail.com" enctype="text/plain">
@@ -225,7 +93,6 @@
           </ul>
         </form>
       </section>
-
       <section class="split contact">
         <section>
           <h3>Email</h3>
@@ -244,6 +111,20 @@
     </div>
   </div>
 
+  <!-- Right Sidebar -->
+  <nav id="nav">
+    <ul class="links">
+      <li><a href="index.html" class="active">🏠 Home</a></li>
+      <li><a href="generic.html">👤 About Me</a></li>
+      <li><a href="elements.html">💡 Skills</a></li>
+    </ul>
+    <ul class="icons">
+      <li><a href="https://linkedin.com/in/rutikeshpawar227" class="icon brands fa-linkedin"><span class="label">LinkedIn</span></a></li>
+      <li><a href="https://github.com/rutikeshpawar" class="icon brands fa-github"><span class="label">GitHub</span></a></li>
+      <li><a href="mailto:rutikeshpawar2000@gmail.com" class="icon solid fa-envelope"><span class="label">Email</span></a></li>
+    </ul>
+  </nav>
+
   <!-- Scripts -->
   <script src="assets/js/jquery.min.js"></script>
   <script src="assets/js/jquery.scrollex.min.js"></script>
@@ -255,13 +136,8 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
 
   <script>
-  function toggleMenu() {
-    const sidebar = document.getElementById('sidebar');
-    sidebar.classList.toggle('open');
-  }
-
-  AOS.init();
-</script>
+    AOS.init();
+  </script>
 
 </body>
 </html>
