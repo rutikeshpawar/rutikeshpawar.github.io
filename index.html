@@ -169,6 +169,7 @@
       </div>
 
     </div> <!-- End of #wrapper -->
+<a href="#" class="scroll-to-top" title="Back to Top">↑</a>
 
     <!-- Scripts -->
     <script src="assets/js/jquery.min.js"></script>
@@ -182,6 +183,25 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
 <script>
   AOS.init();
+</script>
+
+
+    <script>
+  // Show/hide scroll button on scroll
+  const scrollBtn = document.querySelector(".scroll-to-top");
+  window.addEventListener("scroll", () => {
+    if (window.scrollY > 400) {
+      scrollBtn.style.display = "block";
+    } else {
+      scrollBtn.style.display = "none";
+    }
+  });
+
+  // Smooth scroll to top
+  scrollBtn.addEventListener("click", (e) => {
+    e.preventDefault();
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  });
 </script>
 
   </body>
