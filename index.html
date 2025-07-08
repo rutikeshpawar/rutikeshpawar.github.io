@@ -13,35 +13,42 @@
   </script>
   <style>
     /* Sidebar toggle button */
-    .menu-toggle {
-      position: fixed;
-      top: 20px;
-      left: 20px;
-      background: #212931;
-      color: #fff;
-      padding: 10px 15px;
-      border: none;
-      font-size: 18px;
-      cursor: pointer;
-      z-index: 1000;
-    }
+   .menu-toggle {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    background: #212931;
+    color: white;
+    padding: 10px 15px;
+    font-size: 1.2em;
+    z-index: 9999;
+    border: none;
+    cursor: pointer;
+    border-radius: 4px;
+  }
 
     /* Sidebar menu */
     #sidebar {
-      position: fixed;
-      top: 0;
-      left: -250px;
-      width: 250px;
-      height: 100%;
-      background: #1e252d;
-      padding: 2rem 1rem;
-      transition: 0.3s;
-      z-index: 999;
-    }
+    position: fixed;
+    top: 0;
+    left: -260px;
+    width: 250px;
+    height: 100%;
+    background: #111;
+    padding: 30px 20px;
+    transition: 0.3s ease-in-out;
+    z-index: 9998;
+    overflow-y: auto;
+  }
 
     #sidebar.open {
       left: 0;
     }
+
+    #sidebar h2, #sidebar h3 {
+    color: #fff;
+    margin-bottom: 20px;
+  }
 
     #sidebar ul {
       list-style: none;
@@ -49,35 +56,34 @@
     }
 
     #sidebar ul li {
-      margin-bottom: 1.5rem;
+      margin: 20px 0;
     }
 
     #sidebar ul li a {
       color: #fff;
+      font-size: 1.1em;
       text-decoration: none;
       font-weight: bold;
     }
 
     #sidebar .icons a {
-      margin-right: 1rem;
+      margin-right: 10px;
       color: #18bfef;
+      font-size: 1.5em;
     }
 
     /* Main content offset */
-    #wrapper {
-      margin-left: 0;
-      transition: margin-left 0.3s;
+   @media (min-width: 992px) {
+    #sidebar {
+      left: 0;
     }
-
-    #sidebar.open ~ #wrapper {
+    .menu-toggle {
+      display: none;
+    }
+    #wrapper {
       margin-left: 250px;
     }
-
-    @media screen and (max-width: 768px) {
-      #wrapper {
-        margin-left: 0 !important;
-      }
-    }
+  }
   </style>
 </head>
 <body class="is-preload">
@@ -85,13 +91,13 @@
 
   <!-- Sidebar -->
   <div id="sidebar">
-    <h2 style="color: #fff;">Navigation</h2>
+    <h2>Menu</h2>
     <ul>
       <li><a href="index.html">🏠 Home</a></li>
       <li><a href="generic.html">👤 About Me</a></li>
       <li><a href="elements.html">💡 Skills</a></li>
     </ul>
-    <h3 style="color: #fff;">Connect</h3>
+    <h3>Connect</h3>
     <div class="icons">
       <a href="https://www.linkedin.com/in/rutikeshpawar227" class="icon brands fa-linkedin"><span class="label">LinkedIn</span></a>
       <a href="https://github.com/rutikeshpawar" class="icon brands fa-github"><span class="label">GitHub</span></a>
@@ -203,5 +209,12 @@
   <script src="assets/js/breakpoints.min.js"></script>
   <script src="assets/js/util.js"></script>
   <script src="assets/js/main.js"></script>
+
+  <script>
+    function toggleMenu() {
+      document.getElementById('sidebar').classList.toggle('open');
+    }
+  </script>
+  
 </body>
 </html>
