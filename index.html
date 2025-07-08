@@ -8,116 +8,119 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" />
 
-  <style>
-    /* Sidebar Toggle Button */
-    .menu-toggle {
-      position: fixed;
-      top: 20px;
-      left: 20px;
-      background: #212931;
-      color: white;
-      padding: 10px 15px;
-      font-size: 18px;
-      z-index: 9999;
-      border: none;
-      cursor: pointer;
-      border-radius: 4px;
-    }
-
-    /* Sidebar Styles */
-    #sidebar {
-      position: fixed;
-      top: 0;
-      left: -260px;
-      width: 240px;
-      height: 100%;
-      background: #111;
-      padding: 2rem 1rem;
-      transition: 0.3s ease-in-out;
-      z-index: 9998;
-      overflow-y: auto;
-      box-sizing: border-box;
-    }
-
-    #sidebar.open {
-      left: 0;
-    }
-
-   #sidebar h3 {
-    color: #fff;
-    margin: 30px 0 10px;
-    font-size: 1em;
-    letter-spacing: 1px;
-    text-transform: uppercase;
+ <style>
+  /* Remove margin on body */
+  html, body {
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+    font-family: "Segoe UI", sans-serif;
   }
 
-    #sidebar ul {
-      list-style: none;
-      padding: 0;
-      margin: 0;
-    }
+  /* ☰ Toggle button */
+  .menu-toggle {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    background: #212931;
+    color: white;
+    padding: 10px 15px;
+    font-size: 18px;
+    z-index: 9999;
+    border: none;
+    cursor: pointer;
+    border-radius: 4px;
+  }
 
-    #sidebar ul li {
-      margin: 15px 0;
-    }
+  /* Sidebar container */
+  #sidebar {
+    position: fixed;
+    top: 0;
+    left: -260px;
+    width: 240px;
+    height: 100%;
+    background: #111;
+    padding: 2rem 1rem;
+    transition: left 0.3s ease-in-out;
+    z-index: 9998;
+    overflow-y: auto;
+    box-sizing: border-box;
+  }
 
-    #sidebar ul li a {
-      color: #fff;
-      text-decoration: none;
-      font-size: 1.05em;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
+  /* Show sidebar when open */
+  #sidebar.open {
+    left: 0;
+  }
 
-    #sidebar .icons {
+  /* Sidebar content */
+  #sidebar h3 {
+    color: #fff;
+    margin-top: 2rem;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+
+  #sidebar ul {
+    list-style: none;
+    padding: 0;
+    margin: 1rem 0;
+  }
+
+  #sidebar ul li {
+    margin: 15px 0;
+    border-bottom: 1px dotted #444;
+    padding-bottom: 10px;
+  }
+
+  #sidebar ul li a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 1.05em;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  #sidebar .icons {
     display: flex;
     margin-top: 10px;
   }
 
-    #sidebar .icons a {
-      color: #18bfef;
-      margin-right: 10px;
-      font-size: 1.4em;
-      transition: color 0.2s
-    }
-
-    #sidebar .icons a:hover {
-    color: #00d9ff;
-  }
-    
-    /* Content Offset */
-    #wrapper {
-      transition: margin-left 0.3s;
-      margin-left: 0;
-    }
-
-    @media (min-width: 992px) {
-      #sidebar {
-        left: 0;
-      }
-
-      #wrapper {
-        margin-left: 240px;
-      }
-
-      .menu-toggle {
-        display: none;
-      }
-    }
-
-    /* Ensure no horizontal scroll or blank right space */
-  body, html {
-    margin: 0;
-    padding: 0;
-    overflow-x: hidden;
+  #sidebar .icons a {
+    color: #18bfef;
+    margin-right: 10px;
+    font-size: 1.4em;
   }
 
-  .fade-in {
-    max-width: 100%;
+  #wrapper {
+    transition: margin-left 0.3s;
+    padding: 2rem 1rem;
     box-sizing: border-box;
   }
-  </style>
+
+  /* Responsive: on desktop, always show sidebar */
+  @media (min-width: 992px) {
+    #sidebar {
+      left: 0;
+    }
+
+    #wrapper {
+      margin-left: 240px;
+    }
+
+    .menu-toggle {
+      display: none;
+    }
+  }
+
+  /* Prevent toggle button from covering content */
+  #intro {
+    padding-top: 80px;
+  }
+
+</style>
+
 </head>
 
 <body class="is-preload">
@@ -254,7 +257,6 @@
   <script>
   function toggleMenu() {
     const sidebar = document.getElementById('sidebar');
-    const wrapper = document.getElementById('wrapper');
     sidebar.classList.toggle('open');
   }
 
