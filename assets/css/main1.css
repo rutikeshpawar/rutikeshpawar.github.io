@@ -2559,22 +2559,25 @@ input, select, textarea {
 		.icon-list {
 		  display: flex;
 		  flex-wrap: wrap;
-		  gap: 18px; /* Add space between icons */
-		  font-size: 32px;
-		  margin-top: 10px;
+		  gap: 20px; /* Add space between icons */
+		  font-size: 34px;
+		  margin-top: 16px;
 		  justify-content: flex-start;
 		  align-items: center;
+		  padding-left: 0;
+		  list-style: none;
 		}
 		
 		.icon-list i {
 		  color: #444;
 		  transition: 0.3s;
 		  display: inline-block;
-		  margin-right: 10px; /* Optional backup spacing */
+		  width: 36px;
+		  text-align: center;
 		}
 		
 		.icon-list i:hover {
-		  color: #49c5b6;
+		  color: #18bfef;
 		}
 
 
