@@ -4698,3 +4698,19 @@ input, textarea, .button {
     width: 100%;
   }
 }
+
+.tech-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin: 10px 0;
+  padding: 0;
+  list-style: none;
+}
+.tech-tags li {
+  background: #18bfef;
+  color: white;
+  padding: 5px 12px;
+  border-radius: 20px;
+  font-size: 0.75rem;
+}
