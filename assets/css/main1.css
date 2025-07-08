@@ -2556,6 +2556,28 @@ input, select, textarea {
 			font-family: 'Font Awesome 5 Brands';
 		}
 
+		.icon-list {
+		  display: flex;
+		  flex-wrap: wrap;
+		  gap: 18px; /* Add space between icons */
+		  font-size: 32px;
+		  margin-top: 10px;
+		  justify-content: flex-start;
+		  align-items: center;
+		}
+		
+		.icon-list i {
+		  color: #444;
+		  transition: 0.3s;
+		  display: inline-block;
+		  margin-right: 10px; /* Optional backup spacing */
+		}
+		
+		.icon-list i:hover {
+		  color: #49c5b6;
+		}
+
+
 /* Image */
 
 	.image {
