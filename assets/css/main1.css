@@ -2580,13 +2580,10 @@ input, select, textarea {
 }
 		
 		.icon-list i {
-			font-size: 28px;
+			font-size: 44px;
 		  color: #444;
 		  transition: 0.3s;
-		  display: inline-block;
-		  width: 36px;
-		  text-align: center;
-		}
+		  }
 		
 		.icon-list i:hover {
 		  color: #18bfef;
