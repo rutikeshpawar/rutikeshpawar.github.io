@@ -6,9 +6,10 @@
   <title>Rutikesh Pawar Portfolio</title>
   <link rel="stylesheet" href="assets/css/main.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" />
 
   <style>
-    /* Sidebar toggle button */
+    /* Sidebar Toggle Button */
     .menu-toggle {
       position: fixed;
       top: 20px;
@@ -23,7 +24,7 @@
       border-radius: 4px;
     }
 
-    /* Sidebar */
+    /* Sidebar Styles */
     #sidebar {
       position: fixed;
       top: 0;
@@ -67,7 +68,7 @@
       font-size: 1.5em;
     }
 
-    /* Offset content when sidebar is open */
+    /* Content Offset */
     #wrapper {
       transition: margin-left 0.3s;
     }
@@ -90,12 +91,11 @@
 
 <body class="is-preload">
 
-  <!-- ☰ Toggle Button -->
-  <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+  <!-- ☰ Menu Toggle (Mobile) -->
+  <button class="menu-toggle" onclick="toggleMenu()">☰ MENU</button>
 
-  <!-- Sidebar Menu -->
+  <!-- Sidebar -->
   <div id="sidebar">
-    <h2>Menu</h2>
     <ul>
       <li><a href="index.html">🏠 Home</a></li>
       <li><a href="generic.html">👤 About Me</a></li>
@@ -109,26 +109,25 @@
     </div>
   </div>
 
-  <!-- Main Content Wrapper -->
+  <!-- Main Content -->
   <div id="wrapper" class="fade-in">
 
     <!-- Hero Section -->
     <div id="intro">
       <h1>Hello, I'm<br />Rutikesh Pawar</h1>
       <p>Data Analyst & Aspiring Data Scientist | Python • SQL • Tableau • ML <br />
-        I turn raw data into smart, decision-driving insights.
-      </p>
+        I turn raw data into smart, decision-driving insights.</p>
       <ul class="actions">
         <li><a href="#main" class="button icon solid solo fa-arrow-down scrolly">Explore</a></li>
       </ul>
     </div>
 
-    <!-- Main Content -->
+    <!-- Project Portfolio -->
     <div id="main">
       <section class="posts" style="display: flex; flex-wrap: wrap; justify-content: center;">
 
         <!-- Project 1 -->
-        <article>
+        <article data-aos="fade-up">
           <header>
             <h2><a href="#">Smart Farming & Water Optimization</a></h2>
             <span class="date">June 2024 - Dec 2024</span>
@@ -141,7 +140,7 @@
         </article>
 
         <!-- Project 2 -->
-        <article>
+        <article data-aos="fade-up" data-aos-delay="100">
           <header>
             <h2><a href="#">Customer Segmentation Model</a></h2>
             <span class="date">Oct 2024</span>
@@ -154,7 +153,7 @@
         </article>
 
         <!-- Project 3 -->
-        <article>
+        <article data-aos="fade-up" data-aos-delay="200">
           <header>
             <h2><a href="#">Water Quality & Maintenance Dashboard</a></h2>
             <span class="date">Aug 2024</span>
@@ -169,7 +168,7 @@
       </section>
     </div>
 
-    <!-- Footer Contact Section -->
+    <!-- Contact Footer -->
     <footer id="footer">
       <section>
         <form method="POST" action="mailto:rutikeshpawar2000@gmail.com" enctype="text/plain">
@@ -192,6 +191,7 @@
           </ul>
         </form>
       </section>
+
       <section class="split contact">
         <section>
           <h3>Email</h3>
@@ -218,12 +218,13 @@
   <script src="assets/js/breakpoints.min.js"></script>
   <script src="assets/js/util.js"></script>
   <script src="assets/js/main.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
 
-  <!-- Toggle Sidebar -->
   <script>
     function toggleMenu() {
       document.getElementById('sidebar').classList.toggle('open');
     }
+    AOS.init(); // Initialize AOS animations
   </script>
 </body>
 </html>
