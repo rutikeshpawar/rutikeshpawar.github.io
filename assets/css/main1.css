@@ -4737,3 +4737,29 @@ input, textarea, .button {
   background: #00aacc;
 }
 
+/* Skill Tags */
+.tech-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  list-style: none;
+  margin-top: 6px;
+  padding: 0;
+}
+.tech-tags li {
+  background: #18bfef;
+  color: white;
+  font-size: 0.75rem;
+  padding: 4px 10px;
+  border-radius: 12px;
+}
+
+/* Icon Hover */
+.icon-list i {
+  color: #444;
+  transition: 0.3s;
+}
+.icon-list i:hover {
+  color: #49c5b6;
+}
+
