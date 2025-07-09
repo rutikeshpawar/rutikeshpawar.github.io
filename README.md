@@ -54,4 +54,4 @@ View them all live at:
 
 ## 📄 Resume
 
-📥 [Download My Resume (PDF)](https://rutikeshpawar.github.io/rutikesh.pdf)
+📥 [Download My Resume (PDF)](https://github.com/rutikeshpawar/rutikeshpawar.github.io/raw/0214a5c8b894d93e4371f76310cf1f2ca0dbe83c/resume.pdf)
