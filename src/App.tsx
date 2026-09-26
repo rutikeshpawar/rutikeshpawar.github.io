@@ -24,7 +24,8 @@ import {
   Cpu,
   Cloud,
 } from 'lucide-react'
-import { HeroIllustration } from './components/HeroIllustration'
+import { NeuralNetwork3D } from './components/NeuralNetwork3D'
+import { JarvisAssistant } from './components/JarvisAssistant'
 import { Avatar } from './components/Avatar'
 import { ProjectCarousel } from './components/ProjectCarousel'
 import { useScrollY } from './hooks/useScrollY'
@@ -213,12 +214,12 @@ function Section({ id, title, icon: Icon, children, reveal = true }: { id: strin
   return (
     <section
       id={id}
-      className={`scroll-mt-20 py-16 md:py-20 ${reveal ? 'reveal' : ''}`}
+      className={`scroll-mt-20 py-20 md:py-24 ${reveal ? 'reveal' : ''}`}
       data-reveal={reveal ? '' : undefined}
     >
       <div className="mx-auto max-w-4xl px-4 sm:px-6">
-        <h2 className="mb-10 flex items-center gap-2 text-2xl font-bold text-white border-b-2 border-emerald-500 pb-2 w-fit">
-          {Icon && <Icon className="h-6 w-6 text-emerald-500 shrink-0" />}
+        <h2 className="mb-12 flex items-center gap-3 text-3xl font-bold text-white section-heading pb-3 border-b-2 border-emerald-500/50">
+          {Icon && <Icon className="h-7 w-7 text-emerald-500 shrink-0" />}
           {title}
         </h2>
         {children}
@@ -230,9 +231,9 @@ function Section({ id, title, icon: Icon, children, reveal = true }: { id: strin
 function App() {
   const [menuOpen, setMenuOpen] = useState(false)
   const [showBackToTop, setShowBackToTop] = useState(false)
-  const scrollY = useScrollY()
+  const { easedScrollY } = useScrollY()
   const [recruiterMode, setRecruiterMode] = useState(false)
-  const effectiveScrollY = recruiterMode ? 0 : scrollY
+  const effectiveScrollY = recruiterMode ? 0 : easedScrollY
 
   useEffect(() => {
     const onScroll = () => setShowBackToTop(window.scrollY > 500)
@@ -326,15 +327,19 @@ function App() {
       <main id="main">
         {/* Hero */}
         <section id="hero" className="scroll-mt-0 border-b border-slate-800 bg-slate-950 relative overflow-hidden">
-          <div className="absolute inset-0 bg-gradient-to-br from-emerald-500/5 via-transparent to-cyan-500/5 pointer-events-none" aria-hidden />
+          <div className="absolute inset-0 bg-gradient-to-br from-emerald-500/8 via-transparent to-cyan-500/8 pointer-events-none" aria-hidden />
           <div
-            className="absolute top-0 right-0 w-[600px] h-[400px] bg-emerald-500/10 rounded-full blur-3xl pointer-events-none"
-            style={{ transform: `translateY(${effectiveScrollY * 0.25}px)` }}
+            className="absolute top-0 right-0 w-[700px] h-[500px] bg-emerald-500/15 rounded-full blur-3xl pointer-events-none"
+            style={{ transform: `translateY(${effectiveScrollY * 0.15}px)` }}
             aria-hidden
           />
           <div
-            className="absolute bottom-0 left-0 w-[400px] h-[300px] bg-cyan-500/5 rounded-full blur-3xl pointer-events-none"
-            style={{ transform: `translateY(${effectiveScrollY * -0.15}px)` }}
+            className="absolute bottom-0 left-0 w-[500px] h-[400px] bg-cyan-500/10 rounded-full blur-3xl pointer-events-none"
+            style={{ transform: `translateY(${effectiveScrollY * -0.1}px)` }}
+            aria-hidden
+          />
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[600px] bg-amber-500/5 rounded-full blur-3xl pointer-events-none"
+            style={{ transform: `translate(calc(-50% + ${effectiveScrollY * 0.05}px), calc(-50% + ${effectiveScrollY * 0.08}px))` }}
             aria-hidden
           />
           <div className="relative mx-auto max-w-5xl px-4 py-16 sm:px-6 md:py-24">
@@ -359,10 +364,10 @@ function App() {
                   Currently Pursuing PGCP in Artificial Intelligence, CDAC Kharghar
                 </div>
                 <div className="mt-4 flex flex-wrap gap-2">
-                  <span className="inline-flex items-center gap-1.5 rounded-full border border-emerald-500/30 bg-emerald-500/10 px-3 py-1 text-xs font-medium text-emerald-400">
+                  <span className="inline-flex items-center gap-1.5 rounded-full border border-amber-500/30 bg-amber-500/10 px-3 py-1 text-xs font-medium text-amber-400">
                     <Award className="h-3 w-3" /> Published AI/ML Researcher (IJCRT 2024)
                   </span>
-                  <span className="inline-flex items-center gap-1.5 rounded-full border border-emerald-500/30 bg-emerald-500/10 px-3 py-1 text-xs font-medium text-emerald-400">
+                  <span className="inline-flex items-center gap-1.5 rounded-full border border-amber-500/30 bg-amber-500/10 px-3 py-1 text-xs font-medium text-amber-400">
                     <Cloud className="h-3 w-3" /> Oracle Generative AI Certified
                   </span>
                   <span className="inline-flex items-center gap-1.5 rounded-full border border-emerald-500/30 bg-emerald-500/10 px-3 py-1 text-xs font-medium text-emerald-400">
@@ -385,7 +390,7 @@ function App() {
                     href="/Rutikesh_DA_Resume.pdf"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 rounded-lg bg-emerald-500 px-5 py-2.5 font-semibold text-slate-950 hover:bg-emerald-400 transition-colors"
+                    className="inline-flex items-center gap-2 rounded-lg bg-emerald-500 px-5 py-2.5 font-semibold text-slate-950 hover:bg-emerald-400 transition-colors shadow-lg shadow-emerald-500/20"
                   >
                     <FileDown className="h-4 w-4" /> Download Resume
                   </a>
@@ -406,8 +411,8 @@ function App() {
                   ))}
                 </div>
               </div>
-              <div className="hidden lg:block" style={{ transform: `translateY(${effectiveScrollY * 0.1}px)` }}>
-                <HeroIllustration />
+              <div className="hidden lg:block h-[400px]" style={{ transform: `translateY(${effectiveScrollY * 0.08}px)` }}>
+                <NeuralNetwork3D recruiterMode={recruiterMode} />
               </div>
             </div>
           </div>
@@ -425,7 +430,7 @@ function App() {
             <p className="leading-relaxed">
               Oracle Cloud–certified (4 credentials), NASSCOM-certified (92%), and published AI/ML researcher (IJCRT 2024). Actively seeking an AI Engineer role.
             </p>
-            <div className="mt-6 rounded-lg border border-slate-700 bg-emerald-500/10 p-4">
+            <div className="mt-6 rounded-xl border border-slate-700/50 bg-emerald-500/10 p-5 card-enhanced">
               <h3 className="mb-3 flex items-center gap-2 font-semibold text-white">
                 <Trophy className="h-4 w-4 text-emerald-400" /> Highlights
               </h3>
@@ -441,15 +446,15 @@ function App() {
         </Section>
 
         {/* Experience */}
-        <section id="experience" className="scroll-mt-20 border-t border-slate-800 bg-slate-900/30 py-16 md:py-20 reveal" data-reveal>
+        <section id="experience" className="scroll-mt-20 border-t border-slate-800 bg-slate-900/30 py-20 md:py-24 reveal" data-reveal>
           <div className="mx-auto max-w-4xl px-4 sm:px-6">
-            <h2 className="mb-10 flex items-center gap-2 text-2xl font-bold text-white border-b-2 border-emerald-500 pb-2 w-fit">
-              <Briefcase className="h-6 w-6 text-emerald-500" /> Professional Experience
+            <h2 className="mb-12 flex items-center gap-3 text-3xl font-bold text-white section-heading pb-3 border-b-2 border-emerald-500/50">
+              <Briefcase className="h-7 w-7 text-emerald-500" /> Professional Experience
             </h2>
-            <div className="relative border-l-2 border-slate-700 pl-6 space-y-10">
+            <div className="relative border-l-2 border-slate-700/50 pl-6 space-y-10">
               {EXPERIENCE.map((job, i) => (
-                <article key={i} className="relative">
-                  <span className="absolute -left-[29px] top-1.5 h-3 w-3 rounded-full border-2 border-slate-900 bg-emerald-500" />
+                <article key={i} className="relative card-enhanced rounded-lg border border-slate-700/30 bg-slate-800/30 p-5">
+                  <span className="absolute -left-[31px] top-5 h-3 w-3 rounded-full border-2 border-slate-900 bg-emerald-500 shadow-lg shadow-emerald-500/30" />
                   <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
                     <h3 className="text-lg font-semibold text-white">{job.role}{job.badge && <span className="ml-2 text-emerald-400 font-normal">— {job.badge}</span>}</h3>
                     <span className="text-emerald-400 font-medium">{job.company}</span>
@@ -471,12 +476,12 @@ function App() {
         <Section id="projects" title="Featured Projects" icon={FolderKanban}>
           <div className="reveal-stagger grid gap-6 sm:grid-cols-2">
             {PROJECTS.map((proj, i) => (
-              <TiltCard key={i} maxTilt={4} disabled={recruiterMode} className="project-card overflow-hidden rounded-xl border border-slate-700 bg-slate-800/30 hover:border-emerald-500/50">
+              <TiltCard key={i} maxTilt={4} disabled={recruiterMode} className="project-card overflow-hidden rounded-xl border border-slate-700/50 bg-slate-800/40">
                 {proj.images.length > 0 ? (
                   <ProjectCarousel images={proj.images} title={proj.title} projectUrl={proj.url} />
                 ) : (
                   <a href={proj.url} target="_blank" rel="noopener noreferrer" className="block">
-                    <div className="flex aspect-video w-full items-center justify-center bg-slate-800 text-slate-500" aria-hidden>
+                    <div className="flex aspect-video w-full items-center justify-center bg-slate-800/50 text-slate-500" aria-hidden>
                       <LayoutDashboard className="h-12 w-12" />
                     </div>
                   </a>
@@ -489,7 +494,7 @@ function App() {
                     <div className="flex-1">
                       <h3 className="text-lg font-semibold text-white">{proj.title}</h3>
                       {proj.badge && (
-                        <span className="inline-flex items-center gap-1 mt-1 text-xs font-medium text-emerald-400">
+                        <span className="inline-flex items-center gap-1 mt-1 text-xs font-medium text-amber-400">
                           <Award className="h-3 w-3" /> {proj.badge}
                         </span>
                       )}
@@ -507,16 +512,16 @@ function App() {
         </Section>
 
         {/* Skills */}
-        <section id="skills" className="scroll-mt-20 border-t border-slate-800 bg-slate-900/30 py-16 md:py-20 reveal" data-reveal>
+        <section id="skills" className="scroll-mt-20 border-t border-slate-800 bg-slate-900/30 py-20 md:py-24 reveal" data-reveal>
           <div className="mx-auto max-w-4xl px-4 sm:px-6">
-            <h2 className="mb-10 flex items-center gap-2 text-2xl font-bold text-white border-b-2 border-emerald-500 pb-2 w-fit">
-              <Wrench className="h-6 w-6 text-emerald-500" /> Technical Skills
+            <h2 className="mb-12 flex items-center gap-3 text-3xl font-bold text-white section-heading pb-3 border-b-2 border-emerald-500/50">
+              <Wrench className="h-7 w-7 text-emerald-500" /> Technical Skills
             </h2>
             <div className="grid gap-4 sm:grid-cols-2">
               {SKILL_GROUPS.map((g) => {
                 const Icon = g.icon
                 return (
-                  <div key={g.title} className="flex gap-3 rounded-lg border border-slate-700 bg-slate-800/30 p-4">
+                  <div key={g.title} className="skill-card flex gap-3 rounded-xl border border-slate-700/50 bg-slate-800/40 p-5">
                     <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-emerald-500/20 text-emerald-400">
                       <Icon className="h-5 w-5" />
                     </span>
@@ -528,7 +533,7 @@ function App() {
                 )
               })}
             </div>
-            <div className="mt-6 rounded-lg border border-slate-700 bg-emerald-500/10 p-4">
+            <div className="mt-6 rounded-xl border border-slate-700/50 bg-emerald-500/10 p-5 card-enhanced">
               <h3 className="text-sm font-semibold text-white">Core Competencies</h3>
               <p className="mt-2 text-sm text-slate-400">
                 Data Analysis • Business Intelligence • Data Visualization • SQL Querying • Python • Statistical Analysis • EDA • KPI Reporting • Dashboard Development • ETL Pipelines • Data Cleaning • A/B Testing • Predictive Analytics • Data Storytelling • AI-Assisted Development • Report Automation • Stakeholder Communication
@@ -541,7 +546,7 @@ function App() {
         <Section id="education" title="Education" icon={GraduationCap}>
           <div className="space-y-4">
             {EDUCATION.map((e, i) => (
-              <div key={i} className="flex gap-3 rounded-lg border border-slate-700 bg-slate-800/30 p-4">
+              <div key={i} className="skill-card flex gap-3 rounded-xl border border-slate-700/50 bg-slate-800/40 p-5">
                 <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-emerald-500/20 text-emerald-400">
                   <GraduationCap className="h-5 w-5" />
                 </span>
@@ -556,14 +561,14 @@ function App() {
         </Section>
 
         {/* Certifications */}
-        <section id="certifications" className="scroll-mt-20 border-t border-slate-800 bg-slate-900/30 py-16 md:py-20 reveal" data-reveal>
+        <section id="certifications" className="scroll-mt-20 border-t border-slate-800 bg-slate-900/30 py-20 md:py-24 reveal" data-reveal>
           <div className="mx-auto max-w-4xl px-4 sm:px-6">
-            <h2 className="mb-10 flex items-center gap-2 text-2xl font-bold text-white border-b-2 border-emerald-500 pb-2 w-fit">
-              <Award className="h-6 w-6 text-emerald-500" /> Certifications
+            <h2 className="mb-12 flex items-center gap-3 text-3xl font-bold text-white section-heading pb-3 border-b-2 border-emerald-500/50">
+              <Award className="h-7 w-7 text-emerald-500" /> Certifications
             </h2>
             <ul className="space-y-3 text-slate-400">
               {CERTIFICATIONS.map((c, i) => (
-                <li key={i} className="flex items-start gap-2 border-b border-slate-700 pb-3 last:border-0 last:pb-0">
+                <li key={i} className="flex items-start gap-2 border-b border-slate-700/50 pb-3 last:border-0 last:pb-0">
                   <Award className="h-4 w-4 shrink-0 text-emerald-400 mt-0.5" /> {c}
                 </li>
               ))}
@@ -574,25 +579,25 @@ function App() {
         {/* Contact */}
         <Section id="contact" title="Get in Touch" icon={Mail}>
           <div className="grid gap-4 sm:grid-cols-2">
-            <a href="mailto:rutikeshpawar2000@gmail.com" className="flex items-center gap-3 rounded-lg border border-slate-700 bg-slate-800/30 p-4 text-slate-300 hover:border-emerald-500/50 hover:text-emerald-400 transition-colors">
+            <a href="mailto:rutikeshpawar2000@gmail.com" className="skill-card flex items-center gap-3 rounded-xl border border-slate-700/50 bg-slate-800/40 p-4 text-slate-300 hover:border-emerald-500/50 hover:text-emerald-400 transition-colors">
               <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-emerald-500/20 text-emerald-400">
                 <Mail className="h-5 w-5" />
               </span>
               rutikeshpawar2000@gmail.com
             </a>
-            <a href="tel:+919834869880" className="flex items-center gap-3 rounded-lg border border-slate-700 bg-slate-800/30 p-4 text-slate-300 hover:border-emerald-500/50 hover:text-emerald-400 transition-colors">
+            <a href="tel:+919834869880" className="skill-card flex items-center gap-3 rounded-xl border border-slate-700/50 bg-slate-800/40 p-4 text-slate-300 hover:border-emerald-500/50 hover:text-emerald-400 transition-colors">
               <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-emerald-500/20 text-emerald-400">
                 <Phone className="h-5 w-5" />
               </span>
               +91 9834869880
             </a>
-            <a href="https://www.linkedin.com/in/rutikeshpawar227" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 rounded-lg border border-slate-700 bg-slate-800/30 p-4 text-slate-300 hover:border-emerald-500/50 hover:text-emerald-400 transition-colors">
+            <a href="https://www.linkedin.com/in/rutikeshpawar227" target="_blank" rel="noopener noreferrer" className="skill-card flex items-center gap-3 rounded-xl border border-slate-700/50 bg-slate-800/40 p-4 text-slate-300 hover:border-emerald-500/50 hover:text-emerald-400 transition-colors">
               <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-emerald-500/20 text-emerald-400">
                 <Linkedin className="h-5 w-5" />
               </span>
               linkedin.com/in/rutikeshpawar227
             </a>
-            <a href="https://github.com/rutikeshpawar" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 rounded-lg border border-slate-700 bg-slate-800/30 p-4 text-slate-300 hover:border-emerald-500/50 hover:text-emerald-400 transition-colors">
+            <a href="https://github.com/rutikeshpawar" target="_blank" rel="noopener noreferrer" className="skill-card flex items-center gap-3 rounded-xl border border-slate-700/50 bg-slate-800/40 p-4 text-slate-300 hover:border-emerald-500/50 hover:text-emerald-400 transition-colors">
               <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-emerald-500/20 text-emerald-400">
                 <Github className="h-5 w-5" />
               </span>
@@ -621,6 +626,9 @@ function App() {
           © {new Date().getFullYear()} Rutikesh Pawar. Data Scientist and AI Engineer Portfolio.
         </div>
       </footer>
+
+      {/* Jarvis AI Assistant */}
+      <JarvisAssistant recruiterMode={recruiterMode} />
     </div>
   )
 }

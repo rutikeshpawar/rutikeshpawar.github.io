@@ -6,6 +6,8 @@
   --color-emerald-400: #34d399;
   --color-emerald-500: #10b981;
   --color-cyan-400: #22d3ee;
+  --color-amber-400: #fbbf24;
+  --color-amber-500: #f59e0b;
 }
 
 body {
@@ -20,54 +22,114 @@ html {
 /* Scroll-reveal: fade in and slide up when in view */
 .reveal {
   opacity: 0;
-  transform: translateY(16px);
-  transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+  transform: translateY(24px);
+  transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
 }
 .reveal.visible {
   opacity: 1;
   transform: translateY(0);
 }
 
-/* Stagger delay for grid children */
+/* Stagger delay for grid children with enhanced parallax */
 .reveal-stagger > * {
   opacity: 0;
-  transform: translateY(12px);
-  transition: opacity 0.4s ease-out, transform 0.4s ease-out;
+  transform: translateY(20px);
+  transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1), transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
 }
-.reveal-stagger.visible > *:nth-child(1) { transition-delay: 0.05s; }
-.reveal-stagger.visible > *:nth-child(2) { transition-delay: 0.1s; }
-.reveal-stagger.visible > *:nth-child(3) { transition-delay: 0.15s; }
-.reveal-stagger.visible > *:nth-child(4) { transition-delay: 0.2s; }
-.reveal-stagger.visible > *:nth-child(5) { transition-delay: 0.25s; }
-.reveal-stagger.visible > *:nth-child(6) { transition-delay: 0.3s; }
-.reveal-stagger.visible > *:nth-child(7) { transition-delay: 0.35s; }
+.reveal-stagger.visible > *:nth-child(1) { transition-delay: 0.08s; }
+.reveal-stagger.visible > *:nth-child(2) { transition-delay: 0.12s; }
+.reveal-stagger.visible > *:nth-child(3) { transition-delay: 0.16s; }
+.reveal-stagger.visible > *:nth-child(4) { transition-delay: 0.20s; }
+.reveal-stagger.visible > *:nth-child(5) { transition-delay: 0.24s; }
+.reveal-stagger.visible > *:nth-child(6) { transition-delay: 0.28s; }
+.reveal-stagger.visible > *:nth-child(7) { transition-delay: 0.32s; }
 .reveal-stagger.visible > *,
 .reveal.visible .reveal-stagger > * {
   opacity: 1;
   transform: translateY(0);
 }
-.reveal.visible .reveal-stagger > *:nth-child(1) { transition-delay: 0.05s; }
-.reveal.visible .reveal-stagger > *:nth-child(2) { transition-delay: 0.1s; }
-.reveal.visible .reveal-stagger > *:nth-child(3) { transition-delay: 0.15s; }
-.reveal.visible .reveal-stagger > *:nth-child(4) { transition-delay: 0.2s; }
-.reveal.visible .reveal-stagger > *:nth-child(5) { transition-delay: 0.25s; }
-.reveal.visible .reveal-stagger > *:nth-child(6) { transition-delay: 0.3s; }
-.reveal.visible .reveal-stagger > *:nth-child(7) { transition-delay: 0.35s; }
-.reveal.visible .reveal-stagger > *:nth-child(8) { transition-delay: 0.4s; }
+.reveal.visible .reveal-stagger > *:nth-child(1) { transition-delay: 0.08s; }
+.reveal.visible .reveal-stagger > *:nth-child(2) { transition-delay: 0.12s; }
+.reveal.visible .reveal-stagger > *:nth-child(3) { transition-delay: 0.16s; }
+.reveal.visible .reveal-stagger > *:nth-child(4) { transition-delay: 0.20s; }
+.reveal.visible .reveal-stagger > *:nth-child(5) { transition-delay: 0.24s; }
+.reveal.visible .reveal-stagger > *:nth-child(6) { transition-delay: 0.28s; }
+.reveal.visible .reveal-stagger > *:nth-child(7) { transition-delay: 0.32s; }
+.reveal.visible .reveal-stagger > *:nth-child(8) { transition-delay: 0.36s; }
 
-/* Project card hover: lift and glow */
+/* Enhanced card styling with depth */
+.card-enhanced {
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3), 0 2px 4px -1px rgba(0, 0, 0, 0.15);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.card-enhanced:hover {
+  box-shadow: 0 20px 40px -12px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(16, 185, 129, 0.2);
+  transform: translateY(-4px);
+}
+
+/* Project card hover: lift and glow with enhanced depth */
 .project-card {
-  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s ease;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3), 0 2px 4px -1px rgba(0, 0, 0, 0.15);
 }
 .project-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 20px 40px -12px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(16, 185, 129, 0.15);
+  transform: translateY(-6px);
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(16, 185, 129, 0.3), 0 0 20px rgba(16, 185, 129, 0.1);
 }
 
-/* Back to top button */
+/* Skill card enhanced styling */
+.skill-card {
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+.skill-card:hover {
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(16, 185, 129, 0.2);
+  transform: translateY(-2px);
+}
+
+/* Back to top button with enhanced hover */
 .back-to-top {
-  transition: opacity 0.2s, transform 0.2s;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
 }
 .back-to-top:hover {
-  transform: translateY(-2px);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(16, 185, 129, 0.4);
+}
+
+/* Section heading enhancement */
+.section-heading {
+  position: relative;
+}
+.section-heading::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, #10b981 0%, transparent 100%);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.reveal.visible .section-heading::after {
+  transform: scaleX(1);
+}
+
+/* Jarvis Assistant pulsing ring animation */
+@keyframes pulse-ring {
+  0% {
+    box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7);
+  }
+  70% {
+    box-shadow: 0 0 0 10px rgba(16, 185, 129, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(16, 185, 129, 0);
+  }
+}
+
+.animate-pulse-ring {
+  animation: pulse-ring 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
 }
