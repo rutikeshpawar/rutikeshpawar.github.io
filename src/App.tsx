@@ -21,7 +21,6 @@ import {
   Database,
   Code2,
   LayoutDashboard,
-  LineChart,
   Cpu,
   Cloud,
 } from 'lucide-react'
