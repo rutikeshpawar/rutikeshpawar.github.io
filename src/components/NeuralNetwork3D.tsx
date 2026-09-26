@@ -28,8 +28,8 @@ function NeuralNode({ position, delay }: { position: [number, number, number], d
     >
       <sphereGeometry args={[0.15, 16, 16]} />
       <meshStandardMaterial
-        color="#10b981"
-        emissive="#10b981"
+        color="#06B6D4"
+        emissive="#06B6D4"
         emissiveIntensity={hovered ? 0.8 : 0.3}
         transparent
         opacity={0.9}
@@ -44,7 +44,7 @@ function ConnectionLine({ start, end }: { start: [number, number, number], end: 
   return (
     <Line
       points={points}
-      color="#34d399"
+      color="#22D3EE"
       transparent
       opacity={0.3}
       lineWidth={1}
@@ -116,8 +116,8 @@ function NeuralNetworkScene({ recruiterMode }: { recruiterMode: boolean }) {
   return (
     <group ref={groupRef}>
       <ambientLight intensity={0.5} />
-      <pointLight position={[10, 10, 10]} intensity={1} color="#10b981" />
-      <pointLight position={[-10, -10, -10]} intensity={0.5} color="#34d399" />
+      <pointLight position={[10, 10, 10]} intensity={1} color="#06B6D4" />
+      <pointLight position={[-10, -10, -10]} intensity={0.5} color="#22D3EE" />
 
       {nodes.map((position, i) => (
         <NeuralNode key={i} position={position} delay={i * 0.2} />

@@ -212,6 +212,20 @@ const ACHIEVEMENTS = [
 ]
 
 function Section({ id, title, icon: Icon, children, reveal = true }: { id: string; title: string; icon?: React.ComponentType<{ className?: string }>; children: React.ReactNode; reveal?: boolean }) {
+  // Apply gradient text to specific words in titles
+  const getGradientTitle = (title: string) => {
+    const gradientWords = ['Projects', 'Skills', 'Technical']
+    const words = title.split(' ')
+    return words.map((word, index) => {
+      if (gradientWords.includes(word)) {
+        return <span key={index} className="gradient-text">{word}</span>
+      }
+      return <span key={index}>{word}</span>
+    }).flatMap((word, index) => {
+      return index === 0 ? [word] : [' ', word]
+    })
+  }
+
   return (
     <section
       id={id}
@@ -219,9 +233,9 @@ function Section({ id, title, icon: Icon, children, reveal = true }: { id: strin
       data-reveal={reveal ? '' : undefined}
     >
       <div className="mx-auto max-w-4xl px-4 sm:px-6">
-        <h2 className="mb-12 flex items-center gap-3 text-3xl font-bold text-white section-heading pb-3 border-b-2 border-emerald-500/50">
-          {Icon && <Icon className="h-7 w-7 text-emerald-500 shrink-0" />}
-          {title}
+        <h2 className="mb-12 flex items-center gap-3 text-3xl font-bold text-white section-heading pb-3 border-b-2 border-cyan-500/50">
+          {Icon && <Icon className="h-7 w-7 text-cyan-500 shrink-0" />}
+          {getGradientTitle(title)}
         </h2>
         {children}
       </div>
@@ -255,6 +269,19 @@ function App() {
     return () => observer.disconnect()
   }, [])
 
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) (entry.target as HTMLElement).classList.add('visible')
+        })
+      },
+      { rootMargin: '-50px 0px -50px 0px', threshold: 0.05 }
+    )
+    document.querySelectorAll('.reveal-slide-left, .reveal-slide-right').forEach((el) => observer.observe(el))
+    return () => observer.disconnect()
+  }, [])
+
   const handleNavClick = (id: string) => {
     document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' })
     setMenuOpen(false)
@@ -270,12 +297,12 @@ function App() {
       <header className="sticky top-0 z-50 border-b border-slate-800 bg-slate-950/90 backdrop-blur-md">
       <button
         onClick={() => setRecruiterMode((r) => !r)}
-        className="hidden md:flex items-center gap-2 rounded-full border border-slate-700 px-3 py-1.5 text-xs font-medium text-slate-400 hover:border-emerald-500 hover:text-emerald-400 transition-colors"
+        className="hidden md:flex items-center gap-2 rounded-full border border-slate-700 px-3 py-1.5 text-xs font-medium text-slate-400 hover:border-emerald-500 hover:text-cyan-400 transition-colors"
       >
         {recruiterMode ? 'Full Site' : 'Recruiter Mode'}
       </button>
         <div className="mx-auto flex h-14 max-w-5xl items-center justify-between px-4 sm:px-6">
-          <a href="#" onClick={(e) => { e.preventDefault(); handleNavClick('hero') }} className="text-lg font-bold text-white hover:text-emerald-400 transition-colors">
+          <a href="#" onClick={(e) => { e.preventDefault(); handleNavClick('hero') }} className="text-lg font-bold text-white hover:text-cyan-400 transition-colors">
             Rutikesh Pawar
           </a>
           <nav className="hidden md:block" aria-label="Main">
@@ -284,7 +311,7 @@ function App() {
                 <li key={id}>
                   <button
                     onClick={() => handleNavClick(id)}
-                    className="text-sm font-medium text-slate-400 hover:text-emerald-400 transition-colors"
+                    className="text-sm font-medium text-slate-400 hover:text-cyan-400 transition-colors"
                   >
                     {label}
                   </button>
@@ -294,7 +321,7 @@ function App() {
           </nav>
           <button
             onClick={() => setRecruiterMode((r) => !r)}
-            className="hidden md:flex items-center gap-2 rounded-full border border-slate-700 px-3 py-1.5 text-xs font-medium text-slate-400 hover:border-emerald-500 hover:text-emerald-400 transition-colors"
+            className="hidden md:flex items-center gap-2 rounded-full border border-slate-700 px-3 py-1.5 text-xs font-medium text-slate-400 hover:border-emerald-500 hover:text-cyan-400 transition-colors"
           >
             {recruiterMode ? 'Full Site' : 'Recruiter Mode'}
           </button>
@@ -315,7 +342,7 @@ function App() {
             <ul className="flex flex-col gap-2">
               {NAV_LINKS.map(({ id, label }) => (
                 <li key={id}>
-                  <button onClick={() => handleNavClick(id)} className="w-full py-2 text-left text-slate-300 hover:text-emerald-400">
+                  <button onClick={() => handleNavClick(id)} className="w-full py-2 text-left text-slate-300 hover:text-cyan-400">
                     {label}
                   </button>
                 </li>
@@ -328,14 +355,14 @@ function App() {
       <main id="main">
         {/* Hero */}
         <section id="hero" className="scroll-mt-0 border-b border-slate-800 bg-slate-950 relative overflow-hidden">
-          <div className="absolute inset-0 bg-gradient-to-br from-emerald-500/8 via-transparent to-cyan-500/8 pointer-events-none" aria-hidden />
+          <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/8 via-transparent to-violet-500/8 pointer-events-none" aria-hidden />
           <div
-            className="absolute top-0 right-0 w-[700px] h-[500px] bg-emerald-500/15 rounded-full blur-3xl pointer-events-none"
+            className="absolute top-0 right-0 w-[700px] h-[500px] bg-cyan-500/15 rounded-full blur-3xl pointer-events-none"
             style={{ transform: `translateY(${effectiveScrollY * 0.15}px)` }}
             aria-hidden
           />
           <div
-            className="absolute bottom-0 left-0 w-[500px] h-[400px] bg-cyan-500/10 rounded-full blur-3xl pointer-events-none"
+            className="absolute bottom-0 left-0 w-[500px] h-[400px] bg-violet-500/10 rounded-full blur-3xl pointer-events-none"
             style={{ transform: `translateY(${effectiveScrollY * -0.1}px)` }}
             aria-hidden
           />
@@ -351,7 +378,7 @@ function App() {
                     <Avatar />
                   </TiltCard>
                   <div>
-                    <p className="flex items-center gap-2 text-sm font-medium uppercase tracking-wider text-emerald-400">
+                    <p className="flex items-center gap-2 text-sm font-medium uppercase tracking-wider text-cyan-400">
                       <Sparkles className="h-4 w-4" /> Data Analyst | Data Scientist | AI/ML Engineer
                     </p>
                     <h1 className="mt-1 text-4xl font-bold tracking-tight text-white sm:text-5xl">Rutikesh Pawar</h1>
@@ -360,8 +387,8 @@ function App() {
                 <p className="mt-5 max-w-xl text-lg text-slate-400">
                   Data Analyst with 1+ year of experience, building AI/ML systems on the side — from a published crop-disease classifier to ML-powered trading bots — backed by Oracle Generative AI certification.
                 </p>
-                <div className="mt-4 inline-flex items-center gap-2 rounded-full border border-emerald-500/30 bg-emerald-500/10 px-3 py-1 text-xs font-medium text-emerald-400">
-                  <span className="h-1.5 w-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                <div className="mt-4 inline-flex items-center gap-2 rounded-full border border-cyan-500/30 bg-cyan-500/10 px-3 py-1 text-xs font-medium text-cyan-400">
+                  <span className="h-1.5 w-1.5 rounded-full bg-cyan-400 animate-pulse" />
                   Currently Pursuing PGCP in Artificial Intelligence, CDAC Kharghar
                 </div>
                 <div className="mt-4 flex flex-wrap gap-2">
@@ -371,19 +398,19 @@ function App() {
                   <span className="inline-flex items-center gap-1.5 rounded-full border border-amber-500/30 bg-amber-500/10 px-3 py-1 text-xs font-medium text-amber-400">
                     <Cloud className="h-3 w-3" /> Oracle Generative AI Certified
                   </span>
-                  <span className="inline-flex items-center gap-1.5 rounded-full border border-emerald-500/30 bg-emerald-500/10 px-3 py-1 text-xs font-medium text-emerald-400">
+                  <span className="inline-flex items-center gap-1.5 rounded-full border border-cyan-500/30 bg-cyan-500/10 px-3 py-1 text-xs font-medium text-cyan-400">
                     <Database className="h-3 w-3" /> 600K+ Records Analyzed
                   </span>
                 </div>
                 <div className="mt-6 flex flex-wrap gap-4 text-sm text-slate-500">
                   <span className="flex items-center gap-2">
-                    <MapPin className="h-4 w-4 text-emerald-500 shrink-0" /> Pune, India
+                    <MapPin className="h-4 w-4 text-cyan-500 shrink-0" /> Pune, India
                   </span>
-                  <a href="mailto:rutikeshpawar2000@gmail.com" className="flex items-center gap-2 text-slate-400 hover:text-emerald-400 transition-colors">
-                    <Mail className="h-4 w-4 text-emerald-500 shrink-0" /> rutikeshpawar2000@gmail.com
+                  <a href="mailto:rutikeshpawar2000@gmail.com" className="flex items-center gap-2 text-slate-400 hover:text-cyan-400 transition-colors">
+                    <Mail className="h-4 w-4 text-cyan-500 shrink-0" /> rutikeshpawar2000@gmail.com
                   </a>
-                  <a href="tel:+919834869880" className="flex items-center gap-2 text-slate-400 hover:text-emerald-400 transition-colors">
-                    <Phone className="h-4 w-4 text-emerald-500 shrink-0" /> +91 9834869880
+                  <a href="tel:+919834869880" className="flex items-center gap-2 text-slate-400 hover:text-cyan-400 transition-colors">
+                    <Phone className="h-4 w-4 text-cyan-500 shrink-0" /> +91 9834869880
                   </a>
                 </div>
                 <div className="mt-8 flex flex-wrap gap-3">
@@ -391,14 +418,14 @@ function App() {
                     href="/Rutikesh_DA_Resume.pdf"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 rounded-lg bg-emerald-500 px-5 py-2.5 font-semibold text-slate-950 hover:bg-emerald-400 transition-colors shadow-lg shadow-emerald-500/20"
+                    className="inline-flex items-center gap-2 rounded-lg bg-cyan-500 px-5 py-2.5 font-semibold text-slate-950 hover:bg-cyan-400 transition-colors shadow-lg shadow-cyan-500/20"
                   >
                     <FileDown className="h-4 w-4" /> Download Resume
                   </a>
-                  <a href="https://www.linkedin.com/in/rutikeshpawar227" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 rounded-lg border border-slate-600 px-5 py-2.5 font-medium text-slate-300 hover:border-emerald-500 hover:text-emerald-400 transition-colors">
+                  <a href="https://www.linkedin.com/in/rutikeshpawar227" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 rounded-lg border border-slate-600 px-5 py-2.5 font-medium text-slate-300 hover:border-cyan-500 hover:text-cyan-400 transition-colors">
                     <Linkedin className="h-4 w-4" /> LinkedIn
                   </a>
-                  <a href="https://github.com/rutikeshpawar" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 rounded-lg border border-slate-600 px-5 py-2.5 font-medium text-slate-300 hover:border-emerald-500 hover:text-emerald-400 transition-colors">
+                  <a href="https://github.com/rutikeshpawar" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 rounded-lg border border-slate-600 px-5 py-2.5 font-medium text-slate-300 hover:border-cyan-500 hover:text-cyan-400 transition-colors">
                     <Github className="h-4 w-4" /> GitHub
                   </a>
                 </div>
@@ -426,19 +453,19 @@ function App() {
               Data Analyst with <strong className="text-white">1+ year</strong> of experience across 4 internships and 10+ GitHub projects, specializing in <strong className="text-white">SQL</strong>, <strong className="text-white">Python</strong>, <strong className="text-white">Power BI</strong>, <strong className="text-white">Tableau</strong>, and <strong className="text-white">AI/ML</strong>, <strong className="text-white">TensorFlow</strong>, <strong className="text-white">TensorFlow</strong>, <strong className="text-white">PyTorch</strong>, and Generative AI.
             </p>
             <p className="leading-relaxed">
-              Building AI/ML systems on the side including ML-powered trading systems, LLM-integrated tools, and AI-assisted development using Cursor AI and Vercel. Proven ability to transform large-scale datasets into executive dashboards and actionable business intelligence — delivering <strong className="text-emerald-400">40% reporting efficiency gains</strong>, <strong className="text-emerald-400">27% operational improvements</strong>, and <strong className="text-emerald-400">19% profitability increases</strong>.
+              Building AI/ML systems on the side including ML-powered trading systems, LLM-integrated tools, and AI-assisted development using Cursor AI and Vercel. Proven ability to transform large-scale datasets into executive dashboards and actionable business intelligence — delivering <strong className="text-cyan-400">40% reporting efficiency gains</strong>, <strong className="text-cyan-400">27% operational improvements</strong>, and <strong className="text-cyan-400">19% profitability increases</strong>.
             </p>
             <p className="leading-relaxed">
               Oracle Cloud–certified (4 credentials), NASSCOM-certified (92%), and published AI/ML researcher (IJCRT 2024). Actively seeking Data Analyst and AI/ML-focused roles.
             </p>
-            <div className="mt-6 rounded-xl border border-slate-700/50 bg-emerald-500/10 p-5 card-enhanced">
+            <div className="mt-6 rounded-xl border border-slate-700/50 bg-cyan-500/10 p-5 card-enhanced">
               <h3 className="mb-3 flex items-center gap-2 font-semibold text-white">
-                <Trophy className="h-4 w-4 text-emerald-400" /> Highlights
+                <Trophy className="h-4 w-4 text-cyan-400" /> Highlights
               </h3>
               <ul className="space-y-2 text-sm text-slate-400">
                 {ACHIEVEMENTS.map((a) => (
                   <li key={a} className="flex items-start gap-2">
-                    <ChevronRight className="h-4 w-4 shrink-0 text-emerald-400" /> {a}
+                    <ChevronRight className="h-4 w-4 shrink-0 text-cyan-400" /> {a}
                   </li>
                 ))}
               </ul>
@@ -449,16 +476,16 @@ function App() {
         {/* Experience */}
         <section id="experience" className="scroll-mt-20 border-t border-slate-800 bg-slate-900/30 py-20 md:py-24 reveal" data-reveal>
           <div className="mx-auto max-w-4xl px-4 sm:px-6">
-            <h2 className="mb-12 flex items-center gap-3 text-3xl font-bold text-white section-heading pb-3 border-b-2 border-emerald-500/50">
-              <Briefcase className="h-7 w-7 text-emerald-500" /> Professional Experience
+            <h2 className="mb-12 flex items-center gap-3 text-3xl font-bold text-white section-heading pb-3 border-b-2 border-cyan-500/50">
+              <Briefcase className="h-7 w-7 text-cyan-500" /> Professional Experience
             </h2>
             <div className="relative border-l-2 border-slate-700/50 pl-6 space-y-10">
               {EXPERIENCE.map((job, i) => (
                 <article key={i} className="relative card-enhanced rounded-lg border border-slate-700/30 bg-slate-800/30 p-5">
-                  <span className="absolute -left-[31px] top-5 h-3 w-3 rounded-full border-2 border-slate-900 bg-emerald-500 shadow-lg shadow-emerald-500/30" />
+                  <span className="absolute -left-[31px] top-5 h-3 w-3 rounded-full border-2 border-slate-900 bg-cyan-500 shadow-lg shadow-cyan-500/30" />
                   <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
-                    <h3 className="text-lg font-semibold text-white">{job.role}{job.badge && <span className="ml-2 text-emerald-400 font-normal">— {job.badge}</span>}</h3>
-                    <span className="text-emerald-400 font-medium">{job.company}</span>
+                    <h3 className="text-lg font-semibold text-white">{job.role}{job.badge && <span className="ml-2 text-cyan-400 font-normal">— {job.badge}</span>}</h3>
+                    <span className="text-cyan-400 font-medium">{job.company}</span>
                     <span className="flex items-center gap-1 text-sm text-slate-500"><CalendarDays className="h-3.5 w-3.5" /> {job.period}</span>
                     <span className="flex items-center gap-1 text-sm text-slate-500"><MapPin className="h-3.5 w-3.5" /> {job.location}</span>
                   </div>
@@ -477,7 +504,7 @@ function App() {
         <Section id="projects" title="Featured Projects" icon={FolderKanban}>
           <div className="reveal-stagger grid gap-6 sm:grid-cols-2">
             {PROJECTS.map((proj, i) => (
-              <TiltCard key={i} maxTilt={4} disabled={recruiterMode} className="project-card overflow-hidden rounded-xl border border-slate-700/50 bg-slate-800/40">
+              <TiltCard key={i} maxTilt={4} disabled={recruiterMode} className={`project-card overflow-hidden rounded-xl border border-slate-700/50 bg-slate-800/40 ${i % 2 === 0 ? 'reveal-slide-left' : 'reveal-slide-right'}`}>
                 {proj.images.length > 0 ? (
                   <ProjectCarousel images={proj.images} title={proj.title} projectUrl={proj.url} />
                 ) : (
@@ -489,7 +516,7 @@ function App() {
                 )}
                 <div className="p-5">
                   <div className="flex items-center gap-2">
-                    <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-emerald-500/20 text-emerald-400">
+                    <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-cyan-500/20 text-cyan-400">
                       <FolderKanban className="h-4 w-4" />
                     </span>
                     <div className="flex-1">
@@ -503,7 +530,7 @@ function App() {
                   </div>
                   <p className="mt-1 text-xs text-slate-500 font-mono">{proj.stack}</p>
                   <p className="mt-3 text-sm text-slate-400 leading-relaxed">{proj.description}</p>
-                  <a href={proj.url} target="_blank" rel="noopener noreferrer" className="mt-3 inline-flex items-center gap-1.5 text-sm font-medium text-emerald-400 hover:text-emerald-300">
+                  <a href={proj.url} target="_blank" rel="noopener noreferrer" className="mt-3 inline-flex items-center gap-1.5 text-sm font-medium text-cyan-400 hover:text-cyan-300">
                     View on GitHub <ExternalLink className="h-3.5 w-3.5" />
                   </a>
                 </div>
@@ -515,26 +542,26 @@ function App() {
         {/* Skills */}
         <section id="skills" className="scroll-mt-20 border-t border-slate-800 bg-slate-900/30 py-20 md:py-24 reveal" data-reveal>
           <div className="mx-auto max-w-4xl px-4 sm:px-6">
-            <h2 className="mb-12 flex items-center gap-3 text-3xl font-bold text-white section-heading pb-3 border-b-2 border-emerald-500/50">
-              <Wrench className="h-7 w-7 text-emerald-500" /> Technical Skills
+            <h2 className="mb-12 flex items-center gap-3 text-3xl font-bold text-white section-heading pb-3 border-b-2 border-cyan-500/50">
+              <Wrench className="h-7 w-7 text-cyan-500" /> Technical Skills
             </h2>
             <div className="grid gap-4 sm:grid-cols-2">
               {SKILL_GROUPS.map((g) => {
                 const Icon = g.icon
                 return (
                   <div key={g.title} className="skill-card flex gap-3 rounded-xl border border-slate-700/50 bg-slate-800/40 p-5">
-                    <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-emerald-500/20 text-emerald-400">
+                    <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-cyan-500/20 text-cyan-400">
                       <Icon className="h-5 w-5" />
                     </span>
                     <div>
-                      <h3 className="text-sm font-semibold uppercase tracking-wider text-emerald-400">{g.title}</h3>
+                      <h3 className="text-sm font-semibold uppercase tracking-wider text-cyan-400">{g.title}</h3>
                       <p className="mt-2 text-sm text-slate-400">{g.items}</p>
                     </div>
                   </div>
                 )
               })}
             </div>
-            <div className="mt-6 rounded-xl border border-slate-700/50 bg-emerald-500/10 p-5 card-enhanced">
+            <div className="mt-6 rounded-xl border border-slate-700/50 bg-cyan-500/10 p-5 card-enhanced">
               <h3 className="text-sm font-semibold text-white">Core Competencies</h3>
               <p className="mt-2 text-sm text-slate-400">
                 Data Analysis • Business Intelligence • Data Visualization • SQL Querying • Python • Statistical Analysis • EDA • KPI Reporting • Dashboard Development • ETL Pipelines • Data Cleaning • A/B Testing • Predictive Analytics • Data Storytelling • AI-Assisted Development • Report Automation • Stakeholder Communication
@@ -548,13 +575,13 @@ function App() {
           <div className="space-y-4">
             {EDUCATION.map((e, i) => (
               <div key={i} className="skill-card flex gap-3 rounded-xl border border-slate-700/50 bg-slate-800/40 p-5">
-                <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-emerald-500/20 text-emerald-400">
+                <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-cyan-500/20 text-cyan-400">
                   <GraduationCap className="h-5 w-5" />
                 </span>
                 <div>
                   <h3 className="font-semibold text-white">{e.degree}</h3>
                   <p className="text-sm text-slate-500">{e.school}</p>
-                  <p className="mt-1 text-sm font-mono text-emerald-400">{e.grade}</p>
+                  <p className="mt-1 text-sm font-mono text-cyan-400">{e.grade}</p>
                 </div>
               </div>
             ))}
@@ -564,13 +591,13 @@ function App() {
         {/* Certifications */}
         <section id="certifications" className="scroll-mt-20 border-t border-slate-800 bg-slate-900/30 py-20 md:py-24 reveal" data-reveal>
           <div className="mx-auto max-w-4xl px-4 sm:px-6">
-            <h2 className="mb-12 flex items-center gap-3 text-3xl font-bold text-white section-heading pb-3 border-b-2 border-emerald-500/50">
-              <Award className="h-7 w-7 text-emerald-500" /> Certifications
+            <h2 className="mb-12 flex items-center gap-3 text-3xl font-bold text-white section-heading pb-3 border-b-2 border-cyan-500/50">
+              <Award className="h-7 w-7 text-cyan-500" /> Certifications
             </h2>
             <ul className="space-y-3 text-slate-400">
               {CERTIFICATIONS.map((c, i) => (
                 <li key={i} className="flex items-start gap-2 border-b border-slate-700/50 pb-3 last:border-0 last:pb-0">
-                  <Award className="h-4 w-4 shrink-0 text-emerald-400 mt-0.5" /> {c}
+                  <Award className="h-4 w-4 shrink-0 text-cyan-400 mt-0.5" /> {c}
                 </li>
               ))}
             </ul>
@@ -580,26 +607,26 @@ function App() {
         {/* Contact */}
         <Section id="contact" title="Get in Touch" icon={Mail}>
           <div className="grid gap-4 sm:grid-cols-2">
-            <a href="mailto:rutikeshpawar2000@gmail.com" className="skill-card flex items-center gap-3 rounded-xl border border-slate-700/50 bg-slate-800/40 p-4 text-slate-300 hover:border-emerald-500/50 hover:text-emerald-400 transition-colors">
-              <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-emerald-500/20 text-emerald-400">
+            <a href="mailto:rutikeshpawar2000@gmail.com" className="skill-card flex items-center gap-3 rounded-xl border border-slate-700/50 bg-slate-800/40 p-4 text-slate-300 hover:border-cyan-500/50 hover:text-cyan-400 transition-colors">
+              <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-cyan-500/20 text-cyan-400">
                 <Mail className="h-5 w-5" />
               </span>
               rutikeshpawar2000@gmail.com
             </a>
-            <a href="tel:+919834869880" className="skill-card flex items-center gap-3 rounded-xl border border-slate-700/50 bg-slate-800/40 p-4 text-slate-300 hover:border-emerald-500/50 hover:text-emerald-400 transition-colors">
-              <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-emerald-500/20 text-emerald-400">
+            <a href="tel:+919834869880" className="skill-card flex items-center gap-3 rounded-xl border border-slate-700/50 bg-slate-800/40 p-4 text-slate-300 hover:border-cyan-500/50 hover:text-cyan-400 transition-colors">
+              <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-cyan-500/20 text-cyan-400">
                 <Phone className="h-5 w-5" />
               </span>
               +91 9834869880
             </a>
-            <a href="https://www.linkedin.com/in/rutikeshpawar227" target="_blank" rel="noopener noreferrer" className="skill-card flex items-center gap-3 rounded-xl border border-slate-700/50 bg-slate-800/40 p-4 text-slate-300 hover:border-emerald-500/50 hover:text-emerald-400 transition-colors">
-              <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-emerald-500/20 text-emerald-400">
+            <a href="https://www.linkedin.com/in/rutikeshpawar227" target="_blank" rel="noopener noreferrer" className="skill-card flex items-center gap-3 rounded-xl border border-slate-700/50 bg-slate-800/40 p-4 text-slate-300 hover:border-cyan-500/50 hover:text-cyan-400 transition-colors">
+              <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-cyan-500/20 text-cyan-400">
                 <Linkedin className="h-5 w-5" />
               </span>
               linkedin.com/in/rutikeshpawar227
             </a>
-            <a href="https://github.com/rutikeshpawar" target="_blank" rel="noopener noreferrer" className="skill-card flex items-center gap-3 rounded-xl border border-slate-700/50 bg-slate-800/40 p-4 text-slate-300 hover:border-emerald-500/50 hover:text-emerald-400 transition-colors">
-              <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-emerald-500/20 text-emerald-400">
+            <a href="https://github.com/rutikeshpawar" target="_blank" rel="noopener noreferrer" className="skill-card flex items-center gap-3 rounded-xl border border-slate-700/50 bg-slate-800/40 p-4 text-slate-300 hover:border-cyan-500/50 hover:text-cyan-400 transition-colors">
+              <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-cyan-500/20 text-cyan-400">
                 <Github className="h-5 w-5" />
               </span>
               github.com/rutikeshpawar
