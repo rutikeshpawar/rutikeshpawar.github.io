@@ -80,7 +80,7 @@ const EXPERIENCE = [
     badge: 'Top 5 Performer',
     company: 'Guardneer Technologies (S.V. Krishi Nature)',
     period: 'Jun 2024 – Dec 2024',
-    location: 'Pune, India (Remote)',
+    location: 'Mumbai, India',
     points: [
       'Built Tableau and Power BI dashboards for 1,000+ farm records with custom KPIs (Water Risk Index, Profit/Acre, Soil Health Score) — driving 27% irrigation efficiency gain and 19% profitability increase.',
       'Applied Python predictive analytics and ML clustering on agricultural sensor data; automated anomaly detection pipelines, boosting farm productivity by 25%.',
@@ -95,6 +95,7 @@ const PROJECTS = [
     description: 'Built an AI-powered auto-trading system for Nifty50 with a real-time UI dashboard for signal visualization, trade execution, and portfolio tracking. Integrated live market data via APIs and applied ML models for buy/sell signal prediction with automated trade logic. Status: In Progress (Mar 2026 – Present)',
     url: '#',
     images: [] as string[],
+    
   },
   {
     title: 'YouTube Automation AI',
@@ -351,13 +352,13 @@ function App() {
                   </TiltCard>
                   <div>
                     <p className="flex items-center gap-2 text-sm font-medium uppercase tracking-wider text-emerald-400">
-                      <Sparkles className="h-4 w-4" /> Data Scientist • AI Engineer
+                      <Sparkles className="h-4 w-4" /> Data Analyst | Data Scientist | AI/ML Engineer
                     </p>
                     <h1 className="mt-1 text-4xl font-bold tracking-tight text-white sm:text-5xl">Rutikesh Pawar</h1>
                   </div>
                 </div>
                 <p className="mt-5 max-w-xl text-lg text-slate-400">
-                  AI Engineer building ML-powered trading systems and LLM-integrated tools — from a published crop-disease classifier to real-time trading bots analyzing 600K+ records.
+                  Data Analyst with 1+ year of experience, building AI/ML systems on the side — from a published crop-disease classifier to ML-powered trading bots — backed by Oracle Generative AI certification.
                 </p>
                 <div className="mt-4 inline-flex items-center gap-2 rounded-full border border-emerald-500/30 bg-emerald-500/10 px-3 py-1 text-xs font-medium text-emerald-400">
                   <span className="h-1.5 w-1.5 rounded-full bg-emerald-400 animate-pulse" />
@@ -422,13 +423,13 @@ function App() {
         <Section id="about" title="About Me" icon={User}>
           <div className="space-y-4 text-slate-400">
             <p className="text-slate-300 leading-relaxed">
-              AI Engineer with <strong className="text-white">1+ year</strong> of experience across 4 internships and 10+ GitHub projects, specializing in <strong className="text-white">AI/ML</strong>, <strong className="text-white">Python</strong>, <strong className="text-white">TensorFlow</strong>, <strong className="text-white">PyTorch</strong>, and Generative AI.
+              Data Analyst with <strong className="text-white">1+ year</strong> of experience across 4 internships and 10+ GitHub projects, specializing in <strong className="text-white">SQL</strong>, <strong className="text-white">Python</strong>, <strong className="text-white">Power BI</strong>, <strong className="text-white">Tableau</strong>, and <strong className="text-white">AI/ML</strong>, <strong className="text-white">TensorFlow</strong>, <strong className="text-white">TensorFlow</strong>, <strong className="text-white">PyTorch</strong>, and Generative AI.
             </p>
             <p className="leading-relaxed">
-              Proficient in building ML-powered trading systems, LLM-integrated tools, and AI-assisted development using Cursor AI and Vercel. Proven ability to transform large-scale datasets into executive dashboards and actionable business intelligence — delivering <strong className="text-emerald-400">40% reporting efficiency gains</strong>, <strong className="text-emerald-400">27% operational improvements</strong>, and <strong className="text-emerald-400">19% profitability increases</strong>.
+              Building AI/ML systems on the side including ML-powered trading systems, LLM-integrated tools, and AI-assisted development using Cursor AI and Vercel. Proven ability to transform large-scale datasets into executive dashboards and actionable business intelligence — delivering <strong className="text-emerald-400">40% reporting efficiency gains</strong>, <strong className="text-emerald-400">27% operational improvements</strong>, and <strong className="text-emerald-400">19% profitability increases</strong>.
             </p>
             <p className="leading-relaxed">
-              Oracle Cloud–certified (4 credentials), NASSCOM-certified (92%), and published AI/ML researcher (IJCRT 2024). Actively seeking an AI Engineer role.
+              Oracle Cloud–certified (4 credentials), NASSCOM-certified (92%), and published AI/ML researcher (IJCRT 2024). Actively seeking Data Analyst and AI/ML-focused roles.
             </p>
             <div className="mt-6 rounded-xl border border-slate-700/50 bg-emerald-500/10 p-5 card-enhanced">
               <h3 className="mb-3 flex items-center gap-2 font-semibold text-white">
@@ -605,7 +606,7 @@ function App() {
             </a>
           </div>
           <p className="mt-6 flex items-center gap-2 text-slate-500">
-            <Sparkles className="h-4 w-4 text-emerald-500/70" /> Open to AI Engineer opportunities. Let’s connect.
+            <Sparkles className="h-4 w-4 text-emerald-500/70" /> Open to Data Analyst and AI/ML-focused roles. Let’s connect.
           </p>
         </Section>
       </main>
