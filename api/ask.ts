@@ -235,13 +235,19 @@ Rules:
 - If information is not in the context, say "I don't have that information about Rutikesh."
 - Be helpful and professional
 - Keep responses concise and relevant
-- Focus on concrete details from the experience, projects, and skills data`
+- Focus on concrete details from the experience, projects, and skills data
+- Answer in a maximum of 4-6 short sentences or 4-10 brief bullet points, under 80-150 words, unless the visitor explicitly asks for more detail
+- Lead with the direct answer
+- Never use markdown symbols such as ** or # - use plain text and simple "-" bullets only`
 
     try {
       const ai = new GoogleGenAI({ apiKey })
       const result = await ai.models.generateContent({
         model: GEMINI_MODEL,
         contents: `${systemPrompt}\n\nUser: ${question}`,
+        config: {
+          maxOutputTokens: 250,
+        },
       })
 
       const response = result.text

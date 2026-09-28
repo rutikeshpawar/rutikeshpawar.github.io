@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react'
-import { MessageSquare, X, Send, Bot } from 'lucide-react'
+import { X, Send, Bot } from 'lucide-react'
 
 interface Message {
   role: 'user' | 'assistant'
@@ -18,16 +18,25 @@ export function JarvisAssistant({ recruiterMode }: JarvisAssistantProps) {
   const [remaining, setRemaining] = useState(10)
   const [typingIndex, setTypingIndex] = useState(0)
   const [isTyping, setIsTyping] = useState(false)
+  const [hasWelcomed, setHasWelcomed] = useState(false)
   const messagesEndRef = useRef<HTMLDivElement>(null)
   const inputRef = useRef<HTMLInputElement>(null)
 
   const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
 
+  const suggestedQuestions = [
+    "What are your top AI projects?",
+    "What skills do you have?",
+    "Tell me about your experience",
+    "Are you open to work?",
+    "How can I contact you?",
+  ]
+
   useEffect(() => {
     if (messagesEndRef.current) {
-      messagesEndRef.current.scrollIntoView({ behavior: 'smooth' })
+      messagesEndRef.current.scrollIntoView({ behavior: prefersReducedMotion ? 'auto' : 'smooth' })
     }
-  }, [messages, typingIndex])
+  }, [messages, typingIndex, prefersReducedMotion])
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -47,6 +56,14 @@ export function JarvisAssistant({ recruiterMode }: JarvisAssistantProps) {
   }, [isOpen])
 
   useEffect(() => {
+    // Add welcome message when panel first opens
+    if (isOpen && !hasWelcomed && messages.length === 0) {
+      setMessages([{ role: 'assistant', content: 'Hi! I\'m Jarvis, Rutikesh\'s AI assistant. I can tell you about his projects, skills, and experience based on his portfolio data.' }])
+      setHasWelcomed(true)
+    }
+  }, [isOpen, hasWelcomed, messages.length])
+
+  useEffect(() => {
     // Typing effect for assistant messages
     if (isTyping && typingIndex < messages[messages.length - 1]?.content.length) {
       const timer = setTimeout(() => {
@@ -59,11 +76,10 @@ export function JarvisAssistant({ recruiterMode }: JarvisAssistantProps) {
     }
   }, [isTyping, typingIndex, messages, prefersReducedMotion])
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-    if (!input.trim() || isLoading) return
+  const sendQuestion = async (question: string) => {
+    if (!question.trim() || isLoading) return
 
-    const userMessage = input.trim()
+    const userMessage = question.trim()
     setInput('')
     setMessages(prev => [...prev, { role: 'user', content: userMessage }])
     setIsLoading(true)
@@ -78,7 +94,9 @@ export function JarvisAssistant({ recruiterMode }: JarvisAssistantProps) {
       const data = await response.json()
 
       if (response.ok) {
-        setMessages(prev => [...prev, { role: 'assistant', content: data.response }])
+        // Strip markdown symbols from response
+        const cleanResponse = data.response.replace(/\*\*/g, '').replace(/#{1,6}\s/g, '')
+        setMessages(prev => [...prev, { role: 'assistant', content: cleanResponse }])
         setRemaining(data.remaining)
         setIsTyping(true)
       } else {
@@ -89,6 +107,11 @@ export function JarvisAssistant({ recruiterMode }: JarvisAssistantProps) {
     } finally {
       setIsLoading(false)
     }
+  }
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault()
+    await sendQuestion(input)
   }
 
   const getCurrentAssistantMessage = () => {
@@ -135,10 +158,21 @@ export function JarvisAssistant({ recruiterMode }: JarvisAssistantProps) {
 
           {/* Messages */}
           <div className="flex-1 overflow-y-auto p-4 space-y-4">
-            {messages.length === 0 && (
-              <div className="text-center text-slate-400 py-8">
-                <MessageSquare className="w-8 h-8 mx-auto mb-2 text-cyan-400" />
-                <p className="text-sm">Ask me about Rutikesh's projects, skills, or experience...</p>
+            {/* Suggested Questions - shown when empty (after welcome) */}
+            {messages.length === 1 && messages[0].role === 'assistant' && (
+              <div className="flex flex-wrap gap-2 mb-4">
+                {suggestedQuestions.map((question, index) => (
+                  <button
+                    key={index}
+                    type="button"
+                    onClick={() => sendQuestion(question)}
+                    className="text-xs bg-slate-700 text-cyan-400 px-3 py-1.5 rounded-full hover:bg-slate-600 hover:text-cyan-300 transition-colors border border-slate-600 hover:border-cyan-500/50"
+                    disabled={isLoading}
+                    aria-label={`Ask: ${question}`}
+                  >
+                    {question}
+                  </button>
+                ))}
               </div>
             )}
 
@@ -167,9 +201,9 @@ export function JarvisAssistant({ recruiterMode }: JarvisAssistantProps) {
               <div className="flex justify-start">
                 <div className="bg-slate-700 rounded-lg p-3">
                   <div className="flex gap-1">
-                    <div className="w-2 h-2 bg-emerald-400 rounded-full animate-bounce" style={{ animationDelay: '0ms' }} />
-                    <div className="w-2 h-2 bg-emerald-400 rounded-full animate-bounce" style={{ animationDelay: '150ms' }} />
-                    <div className="w-2 h-2 bg-emerald-400 rounded-full animate-bounce" style={{ animationDelay: '300ms' }} />
+                    <div className="w-2 h-2 bg-cyan-400 rounded-full animate-bounce" style={{ animationDelay: '0ms' }} />
+                    <div className="w-2 h-2 bg-cyan-400 rounded-full animate-bounce" style={{ animationDelay: '150ms' }} />
+                    <div className="w-2 h-2 bg-cyan-400 rounded-full animate-bounce" style={{ animationDelay: '300ms' }} />
                   </div>
                 </div>
               </div>
@@ -194,7 +228,7 @@ export function JarvisAssistant({ recruiterMode }: JarvisAssistantProps) {
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
                 placeholder="Ask a question..."
-                className="flex-1 bg-slate-700 text-white rounded-lg px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500 placeholder-slate-400"
+                className="flex-1 bg-slate-700 text-white rounded-lg px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-cyan-500 placeholder-slate-400"
                 disabled={isLoading}
               />
               <button
