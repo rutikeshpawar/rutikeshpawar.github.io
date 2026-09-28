@@ -127,25 +127,86 @@ export function JarvisAssistant({ recruiterMode }: JarvisAssistantProps) {
       {/* Floating Orb Button */}
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className={`fixed bottom-6 right-6 z-50 flex items-center justify-center w-14 h-14 rounded-full bg-cyan-500 text-white shadow-lg hover:bg-cyan-400 transition-all ${
-          !recruiterMode && !prefersReducedMotion ? 'animate-pulse-ring' : ''
-        }`}
+        className={`fixed bottom-6 right-6 z-50 flex items-center justify-center w-16 h-16 rounded-full transition-all ${
+          !recruiterMode && !prefersReducedMotion && !isOpen ? 'jarvis-orb' : ''
+        } ${isOpen ? 'jarvis-orb-close' : ''} ${recruiterMode ? 'jarvis-recruiter-mode' : ''}`}
         aria-label={isOpen ? 'Close Jarvis Assistant' : 'Open Jarvis Assistant'}
-        style={{
-          boxShadow: '0 4px 20px rgba(34, 211, 238, 0.4)',
-        }}
+        style={
+          !recruiterMode && !prefersReducedMotion && !isOpen
+            ? {
+                background: 'radial-gradient(circle at 30% 30%, rgba(34, 211, 238, 0.8), rgba(6, 182, 212, 0.6), rgba(139, 92, 246, 0.4))',
+                boxShadow: '0 0 30px rgba(34, 211, 238, 0.6), 0 0 60px rgba(139, 92, 246, 0.3), inset 0 0 20px rgba(255, 255, 255, 0.2)',
+              }
+            : {
+                background: 'radial-gradient(circle at 30% 30%, rgba(34, 211, 238, 0.9), rgba(6, 182, 212, 0.7))',
+                boxShadow: '0 4px 20px rgba(34, 211, 238, 0.4)',
+              }
+        }
       >
-        {isOpen ? <X className="w-6 h-6" /> : <Bot className="w-6 h-6" />}
+        {!isOpen && !recruiterMode && !prefersReducedMotion && (
+          <>
+            {/* Rotating Ring 1 */}
+            <div
+              className="absolute inset-0 rounded-full border-2 border-cyan-400/30"
+              style={{
+                animation: 'jarvis-rotate-ring-1 8s linear infinite',
+                transformStyle: 'preserve-3d',
+              }}
+            />
+            {/* Rotating Ring 2 */}
+            <div
+              className="absolute inset-0 rounded-full border-2 border-violet-400/30"
+              style={{
+                animation: 'jarvis-rotate-ring-2 6s linear infinite',
+                transformStyle: 'preserve-3d',
+              }}
+            />
+          </>
+        )}
+        {isOpen ? <X className="w-6 h-6 text-white" /> : <Bot className="w-6 h-6 text-white" />}
       </button>
 
       {/* Chat Panel */}
       {isOpen && (
-        <div className="fixed bottom-24 right-6 z-50 w-80 md:w-96 max-h-[500px] bg-slate-900 rounded-2xl border border-slate-700 shadow-2xl flex flex-col overflow-hidden">
+        <div
+          className={`fixed bottom-24 right-6 z-50 w-[calc(100vw-2rem)] md:w-96 max-h-[500px] rounded-2xl overflow-hidden ${
+            !recruiterMode && !prefersReducedMotion ? 'jarvis-panel-animate' : ''
+          } ${recruiterMode ? 'jarvis-recruiter-mode' : ''}`}
+          style={{
+            background: 'linear-gradient(135deg, rgba(34, 211, 238, 0.5), rgba(139, 92, 246, 0.5))',
+            padding: '1px',
+            boxShadow: '0 0 40px rgba(34, 211, 238, 0.2), 0 0 80px rgba(139, 92, 246, 0.1)',
+            transformOrigin: 'bottom right',
+          }}
+        >
+          <div
+            className="rounded-2xl flex flex-col overflow-hidden"
+            style={{
+              background: 'rgba(15, 23, 42, 0.85)',
+              backdropFilter: 'blur(20px)',
+              boxShadow: 'inset 0 0 20px rgba(34, 211, 238, 0.05)',
+            }}
+          >
           {/* Header */}
-          <div className="flex items-center justify-between p-4 border-b border-slate-700 bg-slate-800">
+          <div
+            className="flex items-center justify-between p-4 border-b"
+            style={{
+              background: 'rgba(15, 23, 42, 0.9)',
+              borderColor: 'rgba(34, 211, 238, 0.2)',
+            }}
+          >
             <div className="flex items-center gap-2">
               <Bot className="w-5 h-5 text-cyan-400" />
               <span className="font-semibold text-white">Jarvis</span>
+              {!recruiterMode && !prefersReducedMotion && (
+                <div className="flex items-center gap-1.5">
+                  <div
+                    className="w-2 h-2 rounded-full bg-cyan-400"
+                    style={{ animation: 'jarvis-pulse-dot 2s ease-in-out infinite' }}
+                  />
+                  <span className="text-xs text-cyan-400">Online</span>
+                </div>
+              )}
             </div>
             <button
               onClick={() => setIsOpen(false)}
@@ -166,7 +227,7 @@ export function JarvisAssistant({ recruiterMode }: JarvisAssistantProps) {
                     key={index}
                     type="button"
                     onClick={() => sendQuestion(question)}
-                    className="text-xs bg-slate-700 text-cyan-400 px-3 py-1.5 rounded-full hover:bg-slate-600 hover:text-cyan-300 transition-colors border border-slate-600 hover:border-cyan-500/50"
+                    className="text-xs bg-slate-700/50 text-cyan-400 px-3 py-1.5 rounded-full hover:bg-slate-600/50 hover:text-cyan-300 transition-all border border-slate-600/50 hover:border-cyan-500/50 hover:shadow-lg hover:shadow-cyan-500/20"
                     disabled={isLoading}
                     aria-label={`Ask: ${question}`}
                   >
@@ -179,14 +240,27 @@ export function JarvisAssistant({ recruiterMode }: JarvisAssistantProps) {
             {messages.map((message, index) => (
               <div
                 key={index}
-                className={`flex ${message.role === 'user' ? 'justify-end' : 'justify-start'}`}
+                className={`flex ${message.role === 'user' ? 'justify-end' : 'justify-start'} ${
+                  !recruiterMode && !prefersReducedMotion ? 'message-animate' : ''
+                }`}
               >
                 <div
                   className={`max-w-[80%] rounded-lg p-3 ${
                     message.role === 'user'
-                      ? 'bg-cyan-500 text-slate-950'
-                      : 'bg-slate-700 text-slate-200'
+                      ? 'text-slate-950'
+                      : 'text-slate-200 border border-slate-600/50'
                   }`}
+                  style={
+                    message.role === 'user'
+                      ? {
+                          background: 'linear-gradient(135deg, rgba(34, 211, 238, 0.9), rgba(6, 182, 212, 0.8))',
+                          boxShadow: '0 4px 15px rgba(34, 211, 238, 0.3)',
+                        }
+                      : {
+                          background: 'rgba(30, 41, 59, 0.8)',
+                          backdropFilter: 'blur(10px)',
+                        }
+                  }
                 >
                   {message.role === 'assistant' && index === messages.length - 1 && isTyping ? (
                     <span>{getCurrentAssistantMessage()}</span>
@@ -199,11 +273,27 @@ export function JarvisAssistant({ recruiterMode }: JarvisAssistantProps) {
 
             {isLoading && (
               <div className="flex justify-start">
-                <div className="bg-slate-700 rounded-lg p-3">
+                <div
+                  className="rounded-lg p-3"
+                  style={{
+                    background: 'rgba(30, 41, 59, 0.8)',
+                    backdropFilter: 'blur(10px)',
+                    border: '1px solid rgba(100, 116, 139, 0.3)',
+                  }}
+                >
                   <div className="flex gap-1">
-                    <div className="w-2 h-2 bg-cyan-400 rounded-full animate-bounce" style={{ animationDelay: '0ms' }} />
-                    <div className="w-2 h-2 bg-cyan-400 rounded-full animate-bounce" style={{ animationDelay: '150ms' }} />
-                    <div className="w-2 h-2 bg-cyan-400 rounded-full animate-bounce" style={{ animationDelay: '300ms' }} />
+                    <div
+                      className="w-2 h-2 rounded-full bg-cyan-400"
+                      style={{ animation: prefersReducedMotion ? 'none' : 'jarvis-pulse-dot 1.4s ease-in-out infinite', animationDelay: '0ms' }}
+                    />
+                    <div
+                      className="w-2 h-2 rounded-full bg-cyan-400"
+                      style={{ animation: prefersReducedMotion ? 'none' : 'jarvis-pulse-dot 1.4s ease-in-out infinite', animationDelay: '200ms' }}
+                    />
+                    <div
+                      className="w-2 h-2 rounded-full bg-cyan-400"
+                      style={{ animation: prefersReducedMotion ? 'none' : 'jarvis-pulse-dot 1.4s ease-in-out infinite', animationDelay: '400ms' }}
+                    />
                   </div>
                 </div>
               </div>
@@ -213,14 +303,27 @@ export function JarvisAssistant({ recruiterMode }: JarvisAssistantProps) {
           </div>
 
           {/* Rate Limit Indicator */}
-          <div className="px-4 py-2 bg-slate-800 border-t border-slate-700">
+          <div
+            className="px-4 py-2 border-t"
+            style={{
+              background: 'rgba(15, 23, 42, 0.9)',
+              borderColor: 'rgba(34, 211, 238, 0.2)',
+            }}
+          >
             <p className="text-xs text-slate-400 text-center">
               {remaining} questions left today
             </p>
           </div>
 
           {/* Input */}
-          <form onSubmit={handleSubmit} className="p-4 border-t border-slate-700 bg-slate-800">
+          <form
+            onSubmit={handleSubmit}
+            className="p-4 border-t"
+            style={{
+              background: 'rgba(15, 23, 42, 0.9)',
+              borderColor: 'rgba(34, 211, 238, 0.2)',
+            }}
+          >
             <div className="flex gap-2">
               <input
                 ref={inputRef}
@@ -228,13 +331,13 @@ export function JarvisAssistant({ recruiterMode }: JarvisAssistantProps) {
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
                 placeholder="Ask a question..."
-                className="flex-1 bg-slate-700 text-white rounded-lg px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-cyan-500 placeholder-slate-400"
+                className="flex-1 bg-slate-700/50 text-white rounded-lg px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-cyan-500/50 placeholder-slate-400 border border-slate-600/50"
                 disabled={isLoading}
               />
               <button
                 type="submit"
                 disabled={isLoading || !input.trim()}
-                className="bg-cyan-500 text-white rounded-lg px-4 py-2 hover:bg-cyan-400 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                className="bg-cyan-500 text-white rounded-lg px-4 py-2 hover:bg-cyan-400 disabled:opacity-50 disabled:cursor-not-allowed transition-all hover:shadow-lg hover:shadow-cyan-500/20"
                 aria-label="Send message"
               >
                 <Send className="w-4 h-4" />
@@ -242,6 +345,7 @@ export function JarvisAssistant({ recruiterMode }: JarvisAssistantProps) {
             </div>
           </form>
         </div>
+      </div>
       )}
     </>
   )
