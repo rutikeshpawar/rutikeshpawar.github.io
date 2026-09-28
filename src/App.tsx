@@ -26,6 +26,7 @@ import {
 } from 'lucide-react'
 import { NeuralNetwork3D } from './components/NeuralNetwork3D'
 import { JarvisAssistant } from './components/JarvisAssistant'
+import { FeaturedProjectsCarousel } from './components/FeaturedProjectsCarousel'
 import { Avatar } from './components/Avatar'
 import { ProjectCarousel } from './components/ProjectCarousel'
 import { useScrollY } from './hooks/useScrollY'
@@ -404,7 +405,7 @@ function App() {
                 </div>
                 <div className="mt-6 flex flex-wrap gap-4 text-sm text-slate-500">
                   <span className="flex items-center gap-2">
-                    <MapPin className="h-4 w-4 text-cyan-500 shrink-0" /> Pune, India
+                    <MapPin className="h-4 w-4 text-cyan-500 shrink-0" /> Mumbai, India
                   </span>
                   <a href="mailto:rutikeshpawar2000@gmail.com" className="flex items-center gap-2 text-slate-400 hover:text-cyan-400 transition-colors">
                     <Mail className="h-4 w-4 text-cyan-500 shrink-0" /> rutikeshpawar2000@gmail.com
@@ -502,6 +503,13 @@ function App() {
 
         {/* Projects */}
         <Section id="projects" title="Featured Projects" icon={FolderKanban}>
+          {/* Featured Projects Carousel */}
+          <FeaturedProjectsCarousel
+            projects={PROJECTS.slice(0, 3)}
+            recruiterMode={recruiterMode}
+          />
+
+          {/* Full Project Grid */}
           <div className="reveal-stagger grid gap-6 sm:grid-cols-2">
             {PROJECTS.map((proj, i) => (
               <TiltCard key={i} maxTilt={4} disabled={recruiterMode} className={`project-card overflow-hidden rounded-xl border border-slate-700/50 bg-slate-800/40 ${i % 2 === 0 ? 'reveal-slide-left' : 'reveal-slide-right'}`}>
