@@ -1,4 +1,7 @@
-import { GoogleGenerativeAI } from '@google/generative-ai'
+import { GoogleGenAI } from '@google/genai'
+
+// Model configuration
+const GEMINI_MODEL = 'gemini-3.1-flash-lite'
 
 // Simple in-memory rate limiting
 // NOTE: This resets on cold start and isn't distributed-safe,
@@ -234,24 +237,35 @@ Rules:
 - Keep responses concise and relevant
 - Focus on concrete details from the experience, projects, and skills data`
 
-    const genAI = new GoogleGenerativeAI(apiKey)
-    const model = genAI.getGenerativeModel({ model: 'gemini-2.0-flash' })
+    try {
+      const ai = new GoogleGenAI({ apiKey })
+      const result = await ai.models.generateContent({
+        model: GEMINI_MODEL,
+        contents: `${systemPrompt}\n\nUser: ${question}`,
+      })
 
-    const result = await model.generateContent([
-      systemPrompt,
-      question
-    ])
+      const response = result.text
+      const remaining = rateLimit.remaining
 
-    const response = result.response.text()
-    const remaining = rateLimit.remaining
+      return res.status(200).json({
+        response,
+        remaining,
+      })
+    } catch (geminiError: any) {
+      console.error('Gemini API error:', geminiError)
+      const errorMessage = geminiError?.message || 'Unknown Gemini API error'
+      return res.status(500).json({ 
+        error: 'Failed to process request',
+        details: errorMessage
+      })
+    }
 
-    return res.status(200).json({
-      response,
-      remaining,
-    })
-
-  } catch (error) {
+  } catch (error: any) {
     console.error('Error in ask API:', error)
-    return res.status(500).json({ error: 'Failed to process request' })
+    const errorMessage = error?.message || 'Unknown error'
+    return res.status(500).json({ 
+      error: 'Failed to process request',
+      details: errorMessage
+    })
   }
 }
