@@ -133,20 +133,38 @@ function NeuralNetworkScene({ recruiterMode }: { recruiterMode: boolean }) {
 }
 
 export function NeuralNetwork3D({ recruiterMode }: NeuralNetworkProps) {
+  const [isVisible, setIsVisible] = useState(false)
+  const containerRef = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIsVisible(entry.isIntersecting)
+      },
+      { threshold: 0.1 }
+    )
+    if (containerRef.current) {
+      observer.observe(containerRef.current)
+    }
+    return () => observer.disconnect()
+  }, [])
+
   return (
-    <div className="w-full h-full">
-      <Canvas
-        camera={{ position: [0, 0, 5], fov: 50 }}
-        style={{ background: 'transparent' }}
-      >
-        <Float
-          speed={recruiterMode ? 0 : 1}
-          rotationIntensity={recruiterMode ? 0 : 0.5}
-          floatIntensity={recruiterMode ? 0 : 0.5}
+    <div ref={containerRef} className="w-full h-full">
+      {isVisible && (
+        <Canvas
+          camera={{ position: [0, 0, 5], fov: 50 }}
+          style={{ background: 'transparent', touchAction: 'pan-y' }}
         >
-          <NeuralNetworkScene recruiterMode={recruiterMode} />
-        </Float>
-      </Canvas>
+          <Float
+            speed={recruiterMode ? 0 : 1}
+            rotationIntensity={recruiterMode ? 0 : 0.5}
+            floatIntensity={recruiterMode ? 0 : 0.5}
+          >
+            <NeuralNetworkScene recruiterMode={recruiterMode} />
+          </Float>
+        </Canvas>
+      )}
     </div>
   )
 }

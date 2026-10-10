@@ -1,0 +1,10 @@
+React 19 + TypeScript + Vite + Tailwind v4 portfolio, deployed on Vercel.
+- One task at a time. Plan first, list the files you will change, then act.
+- Add or update only what I ask. Never delete existing projects, claims,
+  achievements or certifications unless I say so.
+- Never invent facts, numbers, dates or tools.
+- Do not add npm packages or new files without asking.
+- Keep recruiterMode and prefers-reduced-motion behaviour.
+- Never print, log or commit secrets. Never touch .env.
+- Do not run git commit or git push.
+- After changes run npm run build and report any errors.

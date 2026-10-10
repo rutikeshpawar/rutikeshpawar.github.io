@@ -83,10 +83,6 @@ export function FeaturedProjectsCarousel({ projects, recruiterMode }: FeaturedPr
 
   return (
     <div className="mb-12">
-      <h3 className="text-2xl font-bold text-white mb-6 flex items-center gap-2">
-        <span className="gradient-text">Featured Projects</span>
-      </h3>
-
       <div
         ref={containerRef}
         className="relative overflow-hidden rounded-2xl border border-slate-700/50 bg-slate-800/40"
@@ -125,14 +121,20 @@ export function FeaturedProjectsCarousel({ projects, recruiterMode }: FeaturedPr
                 <h4 className="text-2xl md:text-3xl font-bold text-white mb-3">{project.title}</h4>
                 <p className="text-sm text-cyan-400 font-mono mb-4">{project.stack}</p>
                 <p className="text-slate-300 leading-relaxed mb-6 text-lg">{project.description}</p>
-                <a
-                  href={project.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 bg-cyan-500 text-slate-950 px-6 py-3 rounded-lg font-semibold hover:bg-cyan-400 transition-colors shadow-lg shadow-cyan-500/20"
-                >
-                  View Project <ExternalLink className="h-4 w-4" />
-                </a>
+                {project.url && project.url !== '#' ? (
+                  <a
+                    href={project.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 bg-cyan-500 text-slate-950 px-6 py-3 rounded-lg font-semibold hover:bg-cyan-400 transition-colors shadow-lg shadow-cyan-500/20"
+                  >
+                    View Project <ExternalLink className="h-4 w-4" />
+                  </a>
+                ) : (
+                  <span className="inline-flex items-center gap-2 bg-slate-700 text-slate-400 px-6 py-3 rounded-lg font-semibold">
+                    Repository coming soon
+                  </span>
+                )}
               </div>
             </div>
           ))}
@@ -144,7 +146,7 @@ export function FeaturedProjectsCarousel({ projects, recruiterMode }: FeaturedPr
             <button
               type="button"
               onClick={handlePrevious}
-              className="absolute left-4 top-1/2 -translate-y-1/2 z-10 rounded-full bg-slate-900/80 p-3 text-white border border-slate-700 hover:bg-slate-800 hover:border-cyan-500/50 transition-all shadow-lg"
+              className="absolute left-4 top-1/2 -translate-y-1/2 z-10 rounded-full bg-slate-900/80 p-3 min-h-[44px] min-w-[44px] text-white border border-slate-700 hover:bg-slate-800 hover:border-cyan-500/50 transition-all shadow-lg"
               aria-label="Previous project"
             >
               <ChevronLeft className="h-5 w-5" />
@@ -152,7 +154,7 @@ export function FeaturedProjectsCarousel({ projects, recruiterMode }: FeaturedPr
             <button
               type="button"
               onClick={handleNext}
-              className="absolute right-4 top-1/2 -translate-y-1/2 z-10 rounded-full bg-slate-900/80 p-3 text-white border border-slate-700 hover:bg-slate-800 hover:border-cyan-500/50 transition-all shadow-lg"
+              className="absolute right-4 top-1/2 -translate-y-1/2 z-10 rounded-full bg-slate-900/80 p-3 min-h-[44px] min-w-[44px] text-white border border-slate-700 hover:bg-slate-800 hover:border-cyan-500/50 transition-all shadow-lg"
               aria-label="Next project"
             >
               <ChevronRight className="h-5 w-5" />
@@ -167,7 +169,7 @@ export function FeaturedProjectsCarousel({ projects, recruiterMode }: FeaturedPr
               key={index}
               type="button"
               onClick={() => goToSlide(index)}
-              className={`h-2 rounded-full transition-all ${
+              className={`h-2 min-h-[44px] w-2 min-w-[44px] rounded-full transition-all ${
                 index === currentIndex
                   ? 'w-8 bg-cyan-500'
                   : 'w-2 bg-slate-600 hover:bg-slate-500'

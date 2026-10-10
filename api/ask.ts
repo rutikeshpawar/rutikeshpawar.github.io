@@ -33,7 +33,7 @@ const EXPERIENCE = [
   {
     role: 'Data Analyst',
     company: 'Neubrain Solution Pvt. Ltd.',
-    period: 'Aug 2024 – Present',
+    period: 'Aug 2025 - Mar 2026',
     location: 'Navi Mumbai, India',
     points: [
       'Leveraged Cursor AI to accelerate Python and SQL data pipeline development — reducing script-writing time by 30% and improving code quality. Built and deployed interactive data analytics web applications using Vercel.',
@@ -55,7 +55,7 @@ const EXPERIENCE = [
   {
     role: 'Data Analytics Intern',
     company: 'Variant AI',
-    period: 'Apr 2024 – Oct 2024',
+    period: 'Mar 2025 - Jul 2025',
     location: 'Remote',
     points: [
       'Analysed 60,000+ records across Zomato (9,500 restaurants, 15 countries) and Healthcare (10,000+ patients) using SQL CTEs, Python Pandas, and Power BI — improving data processing accuracy by 30%.',
@@ -66,8 +66,8 @@ const EXPERIENCE = [
     role: 'Data Analyst Intern',
     badge: 'Top 5 Performer',
     company: 'Guardneer Technologies (S.V. Krishi Nature)',
-    period: 'Jun 2024 – Dec 2024',
-    location: 'Pune, India (Remote)',
+    period: 'Jun 2024 - Dec 2024',
+    location: 'Pune, India',
     points: [
       'Built Tableau and Power BI dashboards for 1,000+ farm records with custom KPIs (Water Risk Index, Profit/Acre, Soil Health Score) — driving 27% irrigation efficiency gain and 19% profitability increase.',
       'Applied Python predictive analytics and ML clustering on agricultural sensor data; automated anomaly detection pipelines, boosting farm productivity by 25%.',
@@ -77,16 +77,16 @@ const EXPERIENCE = [
 
 const PROJECTS = [
   {
-    title: 'Nifty50 Stock Market AI Auto-Trading System',
-    stack: 'Python • Scikit-learn • Pandas • REST APIs • Websockets • Streamlit • Cursor AI',
-    description: 'Built an AI-powered auto-trading system for Nifty50 with a real-time UI dashboard for signal visualization, trade execution, and portfolio tracking. Integrated live market data via APIs and applied ML models for buy/sell signal prediction with automated trade logic. Status: In Progress (Mar 2026 – Present)',
+    title: 'JARVIS - Nifty 50 Options Algo-Trading System',
+    stack: 'Python • Scikit-learn • Pandas • REST APIs • Websockets • Streamlit • Cursor AI • FastAPI • ML • XGBoost',
+    description: 'Built an automated paper-trading system: signal engine (ORB, VWAP, Supertrend + Random Forest regime filter), risk manager, scheduler, FastAPI backend, live dashboard and 4-level data failover. Backtested 4 years of 1-min Nifty data: 836 simulated trades, 50.6% win rate, Rs 30,000 to Rs 2.24L (+645%, simulated, pre-cost); fixed 8 pipeline defects, now running walk-forward validation. Status: Jan 2026 - Present',
     url: '#',
     images: [] as string[],
   },
   {
     title: 'YouTube Automation AI',
-    stack: 'Python • YouTube Data API v3 • REST APIs • LLM APIs (Claude/ChatGPT) • AI Video Generation Tools • MySQL',
-    description: 'Built an AI-powered YouTube automation system — dataset-driven script generation via Claude/ChatGPT, audio generation via ElevenLabs, AI video creation, automated editing, and auto-upload using YouTube Data API v3. Status: In Progress (May 2026 – Present)',
+    stack: 'Python • YouTube Data API v3 • REST APIs • LLM APIs (Claude/ChatGPT) • AI Video Generation Tools • MySQL • Cursor AI',
+    description: 'Built an AI-powered YouTube automation system — dataset-driven script generation via Claude/ChatGPT, audio generation via ElevenLabs, AI video creation, automated editing, and auto-upload using YouTube Data API v3. Working pipeline: LLM scripts, AI voice-over and video, automated editing, auto-upload; front end in progress. Status: May 2026 - Present',
     url: '#',
     images: [] as string[],
   },
@@ -94,7 +94,7 @@ const PROJECTS = [
     title: 'Cropify — AI Crop Disease Detection',
     badge: 'Published: IJCRT 2024',
     stack: 'Python • OpenCV • Scikit-learn • ML Image Classification',
-    description: 'BE Major Project — Published in IJCRT 2024. Built ML image classification model for crop disease detection achieving 85% accuracy; findings published in IJCRT Journal (2024).',
+    description: 'BE Major Project — Published in IJCRT 2024. Built ML image classification model for crop disease detection achieving 85% accuracy; findings published in IJCRT Journal (2024). Status: Jun 2023 - Jun 2024',
     url: 'https://github.com/rutikeshpawar',
     images: [] as string[],
   },
@@ -108,7 +108,7 @@ const PROJECTS = [
   {
     title: 'Zomato Sales Analytics Dashboard',
     stack: 'Python • SQL (CTEs, Window Fns) • Power BI • Tableau • Excel • Cursor AI',
-    description: 'Analyzed 9,500+ restaurants across 15 countries; identified ₹8.45M in sales trends, top cuisines, and city-level demand patterns. Deployed interactive Power BI + Tableau dashboards with drill-through filters and DAX KPIs — reducing manual analysis time by 40%.',
+    description: 'Analyzed 9,500+ restaurants across 15 countries; identified ₹8.45M in sales trends, top cuisines, and city-level demand patterns. Deployed interactive Power BI + Tableau dashboards with drill-through filters and DAX KPIs — reducing manual analysis time by 40%. Status: Aug 2025 - Sep 2025',
     url: 'https://github.com/rutikeshpawar/Zomato-Data-Analytics-Project',
     images: [
       'https://raw.githubusercontent.com/rutikeshpawar/Zomato-Data-Analytics-Project/main/Power_BI/dashboard_overview_powerbi.png',
@@ -169,11 +169,11 @@ const PROJECTS = [
 ]
 
 const SKILL_GROUPS = [
-  { title: 'AI & Machine Learning', items: 'TensorFlow • PyTorch • Keras • Scikit-learn • OpenCV • Clustering' },
+  { title: 'AI & Machine Learning', items: 'TensorFlow • PyTorch • Keras • Scikit-learn • OpenCV • Clustering • NumPy • Matplotlib • Seaborn • Regression • Classification • Backtesting' },
   { title: 'Generative AI & LLMs', items: 'OpenAI API • Anthropic API • Gemini API • Prompt Engineering' },
-  { title: 'AI-Assisted Dev Tools', items: 'Cursor AI • GitHub Copilot • Vercel AI' },
-  { title: 'Programming & Data', items: 'Python • SQL (MySQL) • HTML • CSS' },
-  { title: 'BI & Visualization', items: 'Power BI • Tableau • Zoho Analytics • Excel' },
+  { title: 'AI-Assisted Dev Tools', items: 'Cursor AI • GitHub Copilot • Vercel AI • Windsurf AI' },
+  { title: 'Programming & Data', items: 'Python • SQL (MySQL) • HTML • CSS • NumPy • Matplotlib • Seaborn • FastAPI • REST APIs • Streamlit • Git/GitHub • Vercel • ETL' },
+  { title: 'BI & Visualization', items: 'Power BI • Tableau • Zoho Analytics • Excel (Power Query, Pivot) • DAX • VBA • Oracle Analytics Cloud • A/B Testing • KPI Design • Data Storytelling' },
 ]
 
 export default async function handler(req: any, res: any) {

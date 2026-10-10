@@ -27,6 +27,19 @@ h1, h2, h3, h4, h5, h6 {
   font-family: "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
 }
 
+/* Fluid typography */
+.hero-name {
+  font-size: clamp(2.25rem, 5vw, 4rem);
+}
+
+.section-heading {
+  font-size: clamp(1.75rem, 2.5vw, 2.5rem);
+}
+
+body {
+  font-size: clamp(1rem, 0.5vw + 0.875rem, 1.125rem);
+}
+
 /* Gradient text effect for section headings */
 .gradient-text {
   background: linear-gradient(135deg, #22D3EE 0%, #8B5CF6 100%);

@@ -52,7 +52,7 @@ export function ProjectCarousel({ images, title, projectUrl }: ProjectCarouselPr
             key={src}
             src={src}
             alt={`${title} dashboard ${i + 1}`}
-            className="absolute inset-0 h-full w-full object-cover object-top transition-opacity duration-300"
+            className="absolute inset-0 h-full w-full max-w-full object-cover object-top transition-opacity duration-300"
             style={{ opacity: i === index ? 1 : 0, zIndex: i === index ? 1 : 0 }}
             loading="lazy"
             onError={() => setFailedUrls((f) => new Set(f).add(src))}
@@ -67,7 +67,7 @@ export function ProjectCarousel({ images, title, projectUrl }: ProjectCarouselPr
                 e.stopPropagation()
                 go(-1)
               }}
-              className="absolute left-2 top-1/2 z-10 -translate-y-1/2 rounded-full bg-slate-900/80 p-1.5 text-white opacity-0 transition-opacity hover:bg-slate-800 group-hover:opacity-100"
+              className="absolute left-2 top-1/2 z-10 -translate-y-1/2 rounded-full bg-slate-900/80 p-1.5 min-h-[44px] min-w-[44px] text-white opacity-0 transition-opacity hover:bg-slate-800 group-hover:opacity-100"
               aria-label="Previous image"
             >
               <ChevronLeft className="h-5 w-5" />
@@ -79,7 +79,7 @@ export function ProjectCarousel({ images, title, projectUrl }: ProjectCarouselPr
                 e.stopPropagation()
                 go(1)
               }}
-              className="absolute right-2 top-1/2 z-10 -translate-y-1/2 rounded-full bg-slate-900/80 p-1.5 text-white opacity-0 transition-opacity hover:bg-slate-800 group-hover:opacity-100"
+              className="absolute right-2 top-1/2 z-10 -translate-y-1/2 rounded-full bg-slate-900/80 p-1.5 min-h-[44px] min-w-[44px] text-white opacity-0 transition-opacity hover:bg-slate-800 group-hover:opacity-100"
               aria-label="Next image"
             >
               <ChevronRight className="h-5 w-5" />
