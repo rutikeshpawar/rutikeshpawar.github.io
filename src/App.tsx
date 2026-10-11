@@ -277,6 +277,7 @@ function Section({ id, title, icon: Icon, children, reveal = true }: { id: strin
 function App() {
   const [menuOpen, setMenuOpen] = useState(false)
   const [showBackToTop, setShowBackToTop] = useState(false)
+  const [assistantOpen, setAssistantOpen] = useState(false)
   const { easedScrollY } = useScrollY()
   const [recruiterMode, setRecruiterMode] = useState(false)
   const effectiveScrollY = recruiterMode ? 0 : easedScrollY
@@ -701,11 +702,11 @@ function App() {
         </Section>
       </main>
 
-      {showBackToTop && (
+      {showBackToTop && !assistantOpen && (
         <a
           href="#hero"
           onClick={(e) => { e.preventDefault(); document.getElementById('hero')?.scrollIntoView({ behavior: 'smooth' }) }}
-          className="back-to-top fixed bottom-6 right-6 z-40 flex h-11 w-11 items-center justify-center rounded-full bg-emerald-500 text-slate-950 shadow-lg hover:bg-emerald-400"
+          className="back-to-top fixed bottom-[calc(1.5rem+env(safe-area-inset-bottom))] left-4 z-40 flex h-11 w-11 items-center justify-center rounded-full bg-emerald-500 text-slate-950 shadow-lg hover:bg-emerald-400 sm:left-6"
           aria-label="Back to top"
         >
           <ChevronUp className="h-5 w-5" />
@@ -719,7 +720,7 @@ function App() {
       </footer>
 
       {/* Jarvis AI Assistant */}
-      <JarvisAssistant recruiterMode={recruiterMode} />
+      <JarvisAssistant recruiterMode={recruiterMode} onOpenChange={setAssistantOpen} />
     </div>
   )
 }

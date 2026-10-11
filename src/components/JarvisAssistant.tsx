@@ -1,5 +1,8 @@
-import { useState, useEffect, useRef } from 'react'
-import { X, Send, Bot } from 'lucide-react'
+import { useState, useEffect, useLayoutEffect, useRef, useCallback } from 'react'
+import { X, Send } from 'lucide-react'
+import { AssistantOrb } from './AssistantOrb'
+
+const ASSISTANT_NAME = 'Ask Rutikesh'
 
 interface Message {
   role: 'user' | 'assistant'
@@ -8,9 +11,10 @@ interface Message {
 
 interface JarvisAssistantProps {
   recruiterMode: boolean
+  onOpenChange: (isOpen: boolean) => void
 }
 
-export function JarvisAssistant({ recruiterMode }: JarvisAssistantProps) {
+export function JarvisAssistant({ recruiterMode, onOpenChange }: JarvisAssistantProps) {
   const [isOpen, setIsOpen] = useState(false)
   const [input, setInput] = useState('')
   const [messages, setMessages] = useState<Message[]>([])
@@ -19,10 +23,16 @@ export function JarvisAssistant({ recruiterMode }: JarvisAssistantProps) {
   const [typingIndex, setTypingIndex] = useState(0)
   const [isTyping, setIsTyping] = useState(false)
   const [hasWelcomed, setHasWelcomed] = useState(false)
-  const messagesEndRef = useRef<HTMLDivElement>(null)
+  const messagesContainerRef = useRef<HTMLDivElement>(null)
+  const shouldAutoScrollRef = useRef(true)
   const inputRef = useRef<HTMLInputElement>(null)
+  const [showLatest, setShowLatest] = useState(false)
 
   const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+  const updateOpen = useCallback((open: boolean) => {
+    setIsOpen(open)
+    onOpenChange(open)
+  }, [onOpenChange])
 
   const suggestedQuestions = [
     "What are your top AI projects?",
@@ -32,22 +42,24 @@ export function JarvisAssistant({ recruiterMode }: JarvisAssistantProps) {
     "How can I contact you?",
   ]
 
-  useEffect(() => {
-    if (messagesEndRef.current) {
-      messagesEndRef.current.scrollIntoView({ behavior: prefersReducedMotion ? 'auto' : 'smooth' })
+  useLayoutEffect(() => {
+    const messagesContainer = messagesContainerRef.current
+    if (messagesContainer && shouldAutoScrollRef.current) {
+      messagesContainer.scrollTop = messagesContainer.scrollHeight
+      setShowLatest(false)
     }
-  }, [messages, typingIndex, prefersReducedMotion])
+  }, [messages, typingIndex, isLoading])
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === 'Escape' && isOpen) {
-        setIsOpen(false)
+        updateOpen(false)
       }
     }
 
     window.addEventListener('keydown', handleKeyDown)
     return () => window.removeEventListener('keydown', handleKeyDown)
-  }, [isOpen])
+  }, [isOpen, updateOpen])
 
   useEffect(() => {
     if (isOpen && inputRef.current) {
@@ -58,7 +70,7 @@ export function JarvisAssistant({ recruiterMode }: JarvisAssistantProps) {
   useEffect(() => {
     // Add welcome message when panel first opens
     if (isOpen && !hasWelcomed && messages.length === 0) {
-      setMessages([{ role: 'assistant', content: 'Hi! I\'m Jarvis, Rutikesh\'s AI assistant. I can tell you about his projects, skills, and experience based on his portfolio data.' }])
+      setMessages([{ role: 'assistant', content: 'Hi! I\'m Rutikesh\'s AI assistant. Ask me about his projects, skills, experience, education or how to contact him.' }])
       setHasWelcomed(true)
     }
   }, [isOpen, hasWelcomed, messages.length])
@@ -126,53 +138,30 @@ export function JarvisAssistant({ recruiterMode }: JarvisAssistantProps) {
     <>
       {/* Floating Orb Button */}
       <button
-        onClick={() => setIsOpen(!isOpen)}
-        className={`fixed bottom-6 right-6 z-50 flex items-center justify-center w-16 h-16 rounded-full transition-all ${
-          !recruiterMode && !prefersReducedMotion && !isOpen ? 'jarvis-orb' : ''
-        } ${isOpen ? 'jarvis-orb-close' : ''} ${recruiterMode ? 'jarvis-recruiter-mode' : ''}`}
-        aria-label={isOpen ? 'Close Jarvis Assistant' : 'Open Jarvis Assistant'}
-        style={
-          !recruiterMode && !prefersReducedMotion && !isOpen
-            ? {
-                background: 'radial-gradient(circle at 30% 30%, rgba(34, 211, 238, 0.8), rgba(6, 182, 212, 0.6), rgba(139, 92, 246, 0.4))',
-                boxShadow: '0 0 30px rgba(34, 211, 238, 0.6), 0 0 60px rgba(139, 92, 246, 0.3), inset 0 0 20px rgba(255, 255, 255, 0.2)',
-              }
-            : {
-                background: 'radial-gradient(circle at 30% 30%, rgba(34, 211, 238, 0.9), rgba(6, 182, 212, 0.7))',
-                boxShadow: '0 4px 20px rgba(34, 211, 238, 0.4)',
-              }
-        }
+        type="button"
+        onClick={() => updateOpen(!isOpen)}
+        className={`assistant-launcher fixed z-50 flex items-center justify-center rounded-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-300 focus-visible:ring-offset-4 focus-visible:ring-offset-slate-950${isOpen ? ' assistant-launcher--open' : ''}`}
+        aria-label={isOpen ? `Close ${ASSISTANT_NAME}` : `Open ${ASSISTANT_NAME}`}
+        aria-expanded={isOpen}
+        aria-controls="assistant-chat-panel"
       >
-        {!isOpen && !recruiterMode && !prefersReducedMotion && (
-          <>
-            {/* Rotating Ring 1 */}
-            <div
-              className="absolute inset-0 rounded-full border-2 border-cyan-400/30"
-              style={{
-                animation: 'jarvis-rotate-ring-1 8s linear infinite',
-                transformStyle: 'preserve-3d',
-              }}
-            />
-            {/* Rotating Ring 2 */}
-            <div
-              className="absolute inset-0 rounded-full border-2 border-violet-400/30"
-              style={{
-                animation: 'jarvis-rotate-ring-2 6s linear infinite',
-                transformStyle: 'preserve-3d',
-              }}
-            />
-          </>
-        )}
-        {isOpen ? <X className="w-6 h-6 text-white" /> : <Bot className="w-6 h-6 text-white" />}
+        <AssistantOrb
+          isOpen={isOpen}
+          isThinking={isLoading}
+          recruiterMode={recruiterMode}
+          prefersReducedMotion={prefersReducedMotion}
+        />
       </button>
 
       {/* Chat Panel */}
       {isOpen && (
         <div
-          className={`fixed bottom-24 right-6 z-50 w-[calc(100vw-2rem)] md:w-96 max-h-[500px] rounded-2xl overflow-hidden ${
+          id="assistant-chat-panel"
+          className={`assistant-panel fixed z-50 flex flex-col w-[calc(100vw-2rem)] md:w-96 rounded-2xl overflow-hidden ${
             !recruiterMode && !prefersReducedMotion ? 'jarvis-panel-animate' : ''
           } ${recruiterMode ? 'jarvis-recruiter-mode' : ''}`}
           style={{
+            height: 'min(34rem, calc(100dvh - 7rem))',
             background: 'linear-gradient(135deg, rgba(34, 211, 238, 0.5), rgba(139, 92, 246, 0.5))',
             padding: '1px',
             boxShadow: '0 0 40px rgba(34, 211, 238, 0.2), 0 0 80px rgba(139, 92, 246, 0.1)',
@@ -180,7 +169,7 @@ export function JarvisAssistant({ recruiterMode }: JarvisAssistantProps) {
           }}
         >
           <div
-            className="rounded-2xl flex flex-col overflow-hidden"
+            className="assistant-panel__inner flex min-h-0 flex-1 flex-col overflow-hidden rounded-2xl"
             style={{
               background: 'rgba(15, 23, 42, 0.85)',
               backdropFilter: 'blur(20px)',
@@ -189,36 +178,45 @@ export function JarvisAssistant({ recruiterMode }: JarvisAssistantProps) {
           >
           {/* Header */}
           <div
-            className="flex items-center justify-between p-4 border-b"
+            className="flex shrink-0 items-center justify-between p-4 border-b"
             style={{
               background: 'rgba(15, 23, 42, 0.9)',
               borderColor: 'rgba(34, 211, 238, 0.2)',
             }}
           >
             <div className="flex items-center gap-2">
-              <Bot className="w-5 h-5 text-cyan-400" />
-              <span className="font-semibold text-white">Jarvis</span>
-              {!recruiterMode && !prefersReducedMotion && (
-                <div className="flex items-center gap-1.5">
-                  <div
-                    className="w-2 h-2 rounded-full bg-cyan-400"
-                    style={{ animation: 'jarvis-pulse-dot 2s ease-in-out infinite' }}
-                  />
-                  <span className="text-xs text-cyan-400">Online</span>
-                </div>
-              )}
+              <AssistantOrb
+                isOpen={isOpen}
+                isThinking={isLoading}
+                recruiterMode={recruiterMode}
+                prefersReducedMotion={prefersReducedMotion}
+                compact
+              />
+              <div className="flex flex-col">
+                <span className="font-semibold leading-tight text-white">{ASSISTANT_NAME}</span>
+                <span className="text-xs leading-tight text-cyan-400">AI assistant</span>
+              </div>
             </div>
             <button
-              onClick={() => setIsOpen(false)}
+              onClick={() => updateOpen(false)}
               className="text-slate-400 hover:text-white transition-colors"
-              aria-label="Close"
+              aria-label={`Close ${ASSISTANT_NAME}`}
             >
               <X className="w-5 h-5" />
             </button>
           </div>
 
           {/* Messages */}
-          <div className="flex-1 overflow-y-auto p-4 space-y-4">
+          <div
+            ref={messagesContainerRef}
+            className="assistant-messages relative min-h-0 flex-1 overflow-y-auto overscroll-contain p-4 space-y-4"
+            onScroll={(event) => {
+              const element = event.currentTarget
+              const atBottom = element.scrollHeight - element.scrollTop - element.clientHeight <= 24
+              shouldAutoScrollRef.current = atBottom
+              setShowLatest(!atBottom)
+            }}
+          >
             {/* Suggested Questions - shown when empty (after welcome) */}
             {messages.length === 1 && messages[0].role === 'assistant' && (
               <div className="flex flex-wrap gap-2 mb-4">
@@ -299,12 +297,25 @@ export function JarvisAssistant({ recruiterMode }: JarvisAssistantProps) {
               </div>
             )}
 
-            <div ref={messagesEndRef} />
+            {showLatest && (
+              <button
+                type="button"
+                onClick={() => {
+                  shouldAutoScrollRef.current = true
+                  const element = messagesContainerRef.current
+                  if (element) element.scrollTop = element.scrollHeight
+                  setShowLatest(false)
+                }}
+                className="assistant-latest absolute bottom-3 right-3 rounded-full border border-cyan-400/40 bg-slate-900/95 px-3 py-1.5 text-xs font-medium text-cyan-300 shadow-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-300"
+              >
+                Latest
+              </button>
+            )}
           </div>
 
           {/* Rate Limit Indicator */}
           <div
-            className="px-4 py-2 border-t"
+            className="shrink-0 px-4 py-2 border-t"
             style={{
               background: 'rgba(15, 23, 42, 0.9)',
               borderColor: 'rgba(34, 211, 238, 0.2)',
@@ -318,7 +329,7 @@ export function JarvisAssistant({ recruiterMode }: JarvisAssistantProps) {
           {/* Input */}
           <form
             onSubmit={handleSubmit}
-            className="p-4 border-t"
+            className="shrink-0 p-4 border-t"
             style={{
               background: 'rgba(15, 23, 42, 0.9)',
               borderColor: 'rgba(34, 211, 238, 0.2)',
@@ -331,14 +342,15 @@ export function JarvisAssistant({ recruiterMode }: JarvisAssistantProps) {
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
                 placeholder="Ask a question..."
-                className="flex-1 bg-slate-700/50 text-white rounded-lg px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-cyan-500/50 placeholder-slate-400 border border-slate-600/50"
+                aria-label={`Message ${ASSISTANT_NAME}`}
+                className="assistant-input flex-1 bg-slate-700/50 text-white rounded-lg px-4 py-2 text-base focus:outline-none focus:ring-2 focus:ring-cyan-500/50 placeholder-slate-400 border border-slate-600/50"
                 disabled={isLoading}
               />
               <button
                 type="submit"
                 disabled={isLoading || !input.trim()}
                 className="bg-cyan-500 text-white rounded-lg px-4 py-2 hover:bg-cyan-400 disabled:opacity-50 disabled:cursor-not-allowed transition-all hover:shadow-lg hover:shadow-cyan-500/20"
-                aria-label="Send message"
+                aria-label={`Send message to ${ASSISTANT_NAME}`}
               >
                 <Send className="w-4 h-4" />
               </button>
